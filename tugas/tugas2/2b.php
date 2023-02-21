@@ -1,7 +1,10 @@
 <?php
 
-$i = 1;
-while ($i <= 10) {
-    echo $i;
-    $i++;
+for ($i = 0; $i < 10; $i++) {
+    $u = 1;
+
+    for ($j = 0; $j <= $i; $j++) {
+        echo $u++ . " ";
+    }
+    echo "<br>";
 }
