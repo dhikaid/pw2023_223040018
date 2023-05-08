@@ -5,16 +5,16 @@
 date_default_timezone_set('Asia/Jakarta');
 
 // SMTP
-$SMTPhost = '';
+$SMTPhost = 'smtp.gmail.com';
 $SMTPauth = true;
-$SMTPname = '';
-$SMTPusername = '';
-$SMTPpassword = '';
+$SMTPname = 'no-reply';
+$SMTPusername = 'bhadrikaarya05@gmail.com';
+$SMTPpassword = 'bwhlfouyjrkhcwus';
 $SMTPsecure = 'ssl';
 $SMTPport = 465;
 
 // MIDTRANS
-$MIDkey = '';
+$MIDkey = 'SB-Mid-server-3KzuzM1qrlndtVfPogjq0Kcr';
 $MIDproduction = false;
 
 

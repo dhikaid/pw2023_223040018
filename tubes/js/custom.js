@@ -227,6 +227,7 @@ function buyProduct(data) {
   const idProduct = document.querySelector(".product-id");
   const qty = document.querySelector(".qty-buy");
   const ukuran = document.querySelector(".ukuran");
+  const inputs = buyProduct.querySelectorAll("input, textarea, select, button");
 
   // toastGreen
   const toastBootstrapSuccessLive = document.getElementById("liveToastgreen");
@@ -245,6 +246,9 @@ function buyProduct(data) {
 
     if (idProduct.value !== "" && qty.value !== "") {
       if (qty.value !== "0" && qty.value > "0") {
+        for (let i = 0; i < inputs.length; i++) {
+          inputs[i].disabled = true;
+        }
         $.post("_backend/cart.php", {
           product: idProduct.value,
           qty: qty.value,
@@ -255,6 +259,9 @@ function buyProduct(data) {
             toastBootstrapSuccess.show();
           } else if (response === "1") {
             toastBootstrapFailed.show();
+          }
+          for (let i = 0; i < inputs.length; i++) {
+            inputs[i].disabled = false;
           }
         });
       } else {

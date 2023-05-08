@@ -156,7 +156,7 @@ $headerCateg = query("SELECT category, id_category FROM category");
       <h2 class="text-center fw-bold">SUGGESTIONS</h2>
       <hr class="border border-secondary border-3 opacity-75">
 
-      <div class="row row-cols-1 row-cols-md-6 g-4">
+      <div class="row row-cols-2 row-cols-md-6 g-4">
         <?php foreach ($products as $product) : ?>
           <div class="col pt-3 ">
             <a href="detail?jen=prod&id=<?= $product['id_product']; ?>">

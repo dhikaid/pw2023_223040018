@@ -26,6 +26,7 @@ if (!isset($_GET) || empty($_GET['keyword']) || empty($_GET['page']) || !is_nume
 
 
 $keyword = $_GET['keyword'];
+$page = $_GET['page'];
 
 $searchKeyword = search($_GET, 'prod');
 $keywords = $searchKeyword['query'];
@@ -121,7 +122,7 @@ $headerCateg = query("SELECT category, id_category FROM category");
             <?php if (empty($keywords)) { ?>
                 <p class="text-center">Data not found.</p>
             <?php } else { ?>
-                <div class="row row-cols-1 row-cols-md-6 g-4">
+                <div class="row row-cols-2 row-cols-md-6 g-4">
                     <?php foreach ($keywords as $product) : ?>
 
                         <div class="col-sm pt-3 ">
@@ -144,21 +145,30 @@ $headerCateg = query("SELECT category, id_category FROM category");
                 </div>
                 <div class="mt-3">
                     <ul class="pagination justify-content-center ">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
+
+                        <?php if ($page > 1) : ?>
+                            <li class="page-item">
+                                <a class="page-link" href="?keyword=<?= $keyword; ?>&page=<?= $page - 1; ?>" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                        <?php endif; ?>
 
                         <!-- FOR -->
                         <?php for ($i = 1; $i <= $searchKeyword['page']; $i++) : ?>
-                            <li class="page-item"><a class="page-link" href="?keyword=<?= $keyword; ?>&page=<?= $i; ?>"><?= $i; ?></a></li>
+                            <?php if ($page == $i) : ?>
+                                <li class="page-item active"><a class="page-link" href="?keyword=<?= $keyword; ?>&page=<?= $i; ?>"><?= $i; ?></a></li>
+                            <?php else : ?>
+                                <li class="page-item"><a class="page-link" href="?keyword=<?= $keyword; ?>&page=<?= $i; ?>"><?= $i; ?></a></li>
+                            <?php endif; ?>
                         <?php endfor; ?>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
+                        <?php if ($page < $searchKeyword['page']) : ?>
+                            <li class="page-item">
+                                <a class="page-link" href="?keyword=<?= $keyword; ?>&page=<?= $page + 1; ?>" aria-label="Previous">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        <?php endif; ?>
                     </ul>
                 </div>
             <?php } ?>

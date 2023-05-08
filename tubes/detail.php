@@ -156,9 +156,9 @@ $headerCateg = query("SELECT category, id_category FROM category");
 
                   <div class="col-10">
                     <?php if (isset($_SESSION['login'])) { ?>
-                      <button type="submit" class="btn btn-outline-light d-block w-100"><i class="bi bi-cart-fill"></i> Buy Now</button>
+                      <button type="submit" class="btn btn-outline-light d-block w-100 submit-cart-detail"><i class="bi bi-cart-fill"></i> Buy Now</button>
                     <?php } else { ?>
-                      <a href="login" class="btn btn-outline-light d-block w-100"><i class="bi bi-cart-fill"></i> Buy Now</a>
+                      <a href="login" class="btn btn-outline-light d-block w-100 submit-cart-detail"><i class="bi bi-cart-fill"></i> Buy Now</a>
                     <?php } ?>
                   </div>
                 </div>
@@ -170,7 +170,7 @@ $headerCateg = query("SELECT category, id_category FROM category");
               <h2 class="text-start fw-bold">SUGGESTIONS</h2>
               <hr class="border border-secondary border-3 opacity-75">
 
-              <div class="row row-cols-1 row-cols-md-6 g-4">
+              <div class="row row-cols-2 row-cols-md-6 g-4">
                 <?php foreach ($productsRand as $pRand) : ?>
 
                   <div class="col pt-3 ">
@@ -227,7 +227,7 @@ $headerCateg = query("SELECT category, id_category FROM category");
           </div>
 
           <div class="col-sm">
-            <div class="row row-cols-1 row-cols-md-3 g-4 ">
+            <div class="row row-cols-2 row-cols-md-3 g-4 ">
               <?php foreach ($pcategories as $categ) : ?>
                 <div class="col-sm pt-3 ">
                   <a href="detail?jen=prod&id=<?= $categ['id_product']; ?>">

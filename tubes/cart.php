@@ -122,35 +122,40 @@ $headerCateg = query("SELECT category, id_category FROM category");
                     </tbody>
                 </table>
             </div>
-            <div class="col-sm-4 mb-3">
-                <div class="card bg-dark">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col">
-                                <small class="float-start">Total :</small>
+            <?php if (!empty($transaksi)) { ?>
+                <div class="col-sm-4 mb-3">
+                    <div class="card bg-dark">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <small class="float-start">Total :</small>
+                                </div>
+                                <div class="col">
+                                    <small class="float-end"><?= priceRp($totalPrice); ?> </small>
+                                </div>
                             </div>
-                            <div class="col">
-                                <small class="float-end"><?= priceRp($totalPrice); ?> </small>
+                            <div class="row">
+                                <div class="col">
+                                    <small class="float-start">Tax (11%) :</small>
+                                </div>
+                                <div class="col">
+                                    <small class="float-end"><?= priceRp(pajak($totalPrice, 0.11)); ?> </small>
+                                </div>
                             </div>
+                            <hr>
+                            <h5>Total :</h5>
+                            <h4><?= priceRp(pajak($totalPrice, 0.11) + $totalPrice); ?></h4>
                         </div>
-                        <div class="row">
-                            <div class="col">
-                                <small class="float-start">Tax (11%) :</small>
-                            </div>
-                            <div class="col">
-                                <small class="float-end"><?= priceRp(pajak($totalPrice, 0.11)); ?> </small>
-                            </div>
+                        <div class="card-footer">
+                            <a class="btn btn-outline-light w-100 d-block" href="_backend/pay.php?idtrans=<?= $trks['id_transaksi']; ?>&price=<?= pajak($totalPrice, 0.11) + $totalPrice; ?>">Bayar</a>
                         </div>
-                        <hr>
-                        <h5>Total :</h5>
-                        <h4><?= priceRp(pajak($totalPrice, 0.11) + $totalPrice); ?></h4>
-                    </div>
-                    <div class="card-footer">
-
-                        <a class="btn btn-outline-light w-100 d-block" href="_backend/pay.php?idtrans=<?= $trks['id_transaksi']; ?>&price=<?= pajak($totalPrice, 0.11) + $totalPrice; ?>">Bayar</a>
                     </div>
                 </div>
-            </div>
+            <?php } else { ?>
+                <div class="text-center">
+                    <p>Keranjang kosong.</p>
+                </div>
+            <?php } ?>
         </div>
     </section>
     <!-- footer -->
