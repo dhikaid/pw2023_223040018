@@ -5,16 +5,16 @@
 date_default_timezone_set('Asia/Jakarta');
 
 // SMTP
-$SMTPhost = 'smtp.gmail.com';
+$SMTPhost = '';
 $SMTPauth = true;
-$SMTPname = 'no-reply';
-$SMTPusername = 'bhadrikaarya05@gmail.com';
-$SMTPpassword = 'bwhlfouyjrkhcwus';
-$SMTPsecure = 'ssl';
+$SMTPname = '';
+$SMTPusername = '';
+$SMTPpassword = '';
+$SMTPsecure = '';
 $SMTPport = 465;
 
 // MIDTRANS
-$MIDkey = 'SB-Mid-server-3KzuzM1qrlndtVfPogjq0Kcr';
+$MIDkey = '';
 $MIDproduction = false;
 
 
@@ -26,10 +26,10 @@ function base_url()
 
 function dbConn()
 {
-    $hostDB = "localhost";
-    $userDB = "root";
+    $hostDB = "";
+    $userDB = "";
     $passDB = "";
-    $nameDB = "tubespw2023_2";
+    $nameDB = "";
     return mysqli_connect($hostDB, $userDB, $passDB, $nameDB);
 }
 
