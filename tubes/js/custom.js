@@ -56,6 +56,8 @@ function changePass() {
         Swal.fire("Failed", "Your password is too short.", "error");
       } else if (response === "3") {
         Swal.fire("Failed", "Your previous password is incorrect.", "error");
+      } else {
+        Swal.fire("Failed", response, "error");
       }
     });
   });
@@ -270,5 +272,15 @@ function buyProduct(data) {
     } else {
       toastBootstrapFailed.show();
     }
+  });
+}
+
+function resetFilter() {
+  // Dapatkan semua elemen radio input dengan class check-filter
+  const filterRadios = document.querySelectorAll(".check-filter");
+
+  // Loop melalui setiap radio input dan set checked ke false
+  filterRadios.forEach((radio) => {
+    radio.checked = false;
   });
 }

@@ -439,7 +439,7 @@ if ($reset['error'] == false) {
     header("Location: ../forgot?return=success&rmessage=$reset[message]");
     exit();
   } catch (Exception $e) {
-    header("Location: ../forgot?return=error&rmessage=$reset[message]");
+    header("Location: ../forgot?return=success&rmessage={$mail->ErrorInfo}");
     exit();
     echo 'Mailer Error: ' . $mail->ErrorInfo;
   }

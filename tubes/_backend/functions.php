@@ -11,7 +11,7 @@ $SMTPname = '';
 $SMTPusername = '';
 $SMTPpassword = '';
 $SMTPsecure = '';
-$SMTPport = 465;
+$SMTPport = 587;
 
 // MIDTRANS
 $MIDkey = '';
@@ -522,7 +522,13 @@ function search($keyword, $jenis)
 {
     $db = dbConn();
     $pagination = false;
+    $filter = '';
 
+
+    if (isset($keyword['filter'])) {
+        $keyFilter = $keyword['filter'];
+        $filter = "AND category.id_category = $keyFilter";
+    }
     if (isset($keyword['page'])) {
         $page = $keyword['page'];
         $keyword = $keyword['keyword'];
@@ -536,7 +542,7 @@ function search($keyword, $jenis)
         $query = "SELECT DISTINCT product.product, product.id_product, product.price, product.img, category.category 
         FROM product, category 
         WHERE product.id_category = category.id_category 
-        AND (category.category LIKE '%$keyword%' OR product.product LIKE '%$keyword%')";
+        AND (category.category LIKE '%$keyword%' OR product.product LIKE '%$keyword%') $filter";
     } elseif ($jenis === 'categ') {
         $query = "SELECT id_category, img, category FROM category WHERE category LIKE '%$keyword%'";
     }
@@ -772,7 +778,11 @@ function searchPurchase($keyword, $iduser)
     $db = dbConn();
 
     // transaksi
-    $query = "SELECT transaksi.id_transaksi,  transaksi.tanggal, pembayaran.payment_method, pembayaran.payment_code, pembayaran.transaction_status, pembayaran.status_code FROM transaksi, pembayaran WHERE transaksi.id_transaksi = pembayaran.id_transaksi AND pembayaran.status_code != 0 AND transaksi.id_users = '$iduser' AND (pembayaran.transaction_status LIKE '%$keyword%' OR transaksi.id_transaksi LIKE '%$keyword%' OR pembayaran.payment_method LIKE '%$keyword%') ORDER BY transaksi.tanggal DESC";
+    // $query = "SELECT transaksi.id_transaksi,  transaksi.tanggal, pembayaran.payment_method, pembayaran.payment_code, pembayaran.transaction_status, pembayaran.status_code FROM transaksi, pembayaran WHERE transaksi.id_transaksi = pembayaran.id_transaksi AND pembayaran.status_code != 0 AND transaksi.id_users = '$iduser' AND (pembayaran.transaction_status LIKE '%$keyword%' OR transaksi.id_transaksi LIKE '%$keyword%' OR pembayaran.payment_method LIKE '%$keyword%') ORDER BY transaksi.tanggal DESC";
+
+    $query = "SELECT transaksi.id_transaksi,  transaksi.tanggal, pembayaran.payment_method, pembayaran.payment_code, pembayaran.transaction_status, pembayaran.status_code FROM transaksi, pembayaran, transaksi_detail, product WHERE transaksi.id_transaksi = pembayaran.id_transaksi AND transaksi.id_transaksi = transaksi_detail.id_transaksi AND transaksi_detail.id_product = product.id_product AND pembayaran.status_code != 0  AND transaksi.id_users = '$iduser' AND (pembayaran.transaction_status LIKE '%$keyword%' OR transaksi.id_transaksi LIKE '%$keyword%' OR pembayaran.payment_method LIKE '%$keyword%' OR product.product LIKE '%$keyword%') GROUP BY transaksi.id_transaksi, transaksi.tanggal, pembayaran.payment_method, pembayaran.payment_code, pembayaran.transaction_status, pembayaran.status_code ORDER BY transaksi.tanggal DESC";
+
+
     $result = mysqli_query($db, $query);
     $rows = array();
     while ($row = mysqli_fetch_assoc($result)) {
@@ -841,7 +851,10 @@ function resetPass($data, $token)
 
 
     // cek profile
-    $profile = query("SELECT id_users FROM user_token WHERE token = '$token'")[0];
+    if (!$profile = query("SELECT id_users FROM user_token WHERE token = '$token'")[0]) {
+        header("Location: login");
+        exit();
+    }
 
 
 
