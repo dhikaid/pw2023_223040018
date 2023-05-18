@@ -5,14 +5,14 @@ $jenis = $_GET['jenis'];
 
 if ($jenis === 'purch') {
     $iduser = $_GET['idu'];
-    $keyword = searchPurchase($_GET['keyword'], $iduser);
+    $keyword = searchPurchase(htmlspecialchars($_GET['keyword']), $iduser);
 } else {
     if ($jenis === 'prodindex') {
         $jenis2 = 'prod';
     } else {
         $jenis2 = $jenis;
     }
-    $searchkeyword = search($_GET['keyword'], $jenis2);
+    $searchkeyword = search(htmlspecialchars($_GET['keyword']), $jenis2);
     $keyword = $searchkeyword['query'];
 }
 ?>

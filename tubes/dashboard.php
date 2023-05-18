@@ -57,6 +57,23 @@ $headerCateg = query("SELECT category, id_category FROM category");
 // transaksi
 $purchases = query("SELECT transaksi.id_transaksi, transaksi.tanggal,  pembayaran.payment_method, pembayaran.payment_code, pembayaran.transaction_status, pembayaran.status_code FROM transaksi, pembayaran WHERE transaksi.id_transaksi = pembayaran.id_transaksi AND pembayaran.status_code != 0 AND transaksi.id_users = '$myuser[id_users]' ORDER BY transaksi.tanggal DESC");
 
+$dashboardPurchase = query("SELECT transaksi_detail.price, pembayaran.transaction_status FROM transaksi, transaksi_detail, pembayaran WHERE transaksi.id_transaksi = transaksi_detail.id_transaksi AND transaksi.id_transaksi = pembayaran.id_transaksi GROUP BY transaksi.id_transaksi, transaksi_detail.price, pembayaran.transaction_status");
+
+$sucessPurchase = 0;
+$PendingPurchase = 0;
+$CancelPurchase = 0;
+
+foreach ($dashboardPurchase as $dashPurchase) {
+
+  if ($dashPurchase['transaction_status'] === 'paid') {
+    $sucessPurchase = $dashPurchase['price'] + $sucessPurchase;
+  } elseif ($dashPurchase['transaction_status'] === 'cancel') {
+
+    $CancelPurchase = $dashPurchase['price'] + $CancelPurchase;
+  } else {
+    $PendingPurchase = $dashPurchase['price'] + $PendingPurchase;
+  }
+}
 
 // konten
 require('views/dashboard.view.php');

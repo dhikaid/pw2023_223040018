@@ -15,6 +15,10 @@
         </div>
     </div>
 </footer>
+
+<script>
+    statistikWEB();
+</script>
 </body>
 
 </html>

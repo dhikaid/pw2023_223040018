@@ -65,6 +65,7 @@ $html = '<!DOCTYPE html>
 
 if ($jenis === 'prod') {
     $html .= '<h1>List Product : </h1>
+    <p>Total <b>' . count($query) . '</b> Products</p>
     <table border="1" cellpadding="10" cellspacing="0" class="m-auto">
         <tr>
             <th>No. </th>
@@ -92,6 +93,7 @@ if ($jenis === 'prod') {
 
 if ($jenis === 'user') {
     $html .= '<h1>List Users : </h1>
+    <p>Total <b>' . count($query) . '</b> Users</p>
     <table border="1" cellpadding="10" cellspacing="0" class="m-auto">
         <tr>
             <th>No. </th>
@@ -119,6 +121,7 @@ if ($jenis === 'user') {
 
 if ($jenis === 'categ') {
     $html .= '<h1>List Category : </h1>
+    <p>Total <b>' . count($query) . '</b> Categories</p>
     <table border="1" cellpadding="10" cellspacing="0" class="m-auto">
         <tr>
             <th>No. </th>

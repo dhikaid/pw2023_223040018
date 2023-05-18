@@ -63,7 +63,9 @@ if ($error) {  ?>
                             </div>
                             <div class="mb-3 mt-5">
                                 <label for="exampleFormControlInput1" class="form-label">Detail :</label>
-                                <textarea type="textarea" name="detail" class="form-control bg-dark" required /><?php echo htmlspecialchars($products['detail']); ?></textarea>
+                                <!-- <textarea type="textarea" name="detail" class="form-control bg-dark" required /></textarea> -->
+                                <textarea name="detail" rows="100" cols="80" id="detail"><?php echo $products['detail']; ?></textarea>
+
                             </div>
                             <div class="mb-3 mt-5">
                                 <label for="exampleFormControlInput1" class="form-label">Price :</label>
@@ -117,7 +119,7 @@ if ($error) {  ?>
                             </div>
                             <div class="mb-3 mt-5">
                                 <label for="exampleFormControlInput1" class="form-label">Detail :</label>
-                                <textarea type="textarea" name="detail" class="form-control bg-dark" required /><?php echo htmlspecialchars($category['detail']); ?></textarea>
+                                <textarea type="textarea" name="detail" class="form-control bg-dark" required /><?php echo $category['detail']; ?></textarea>
                             </div>
                         <?php } elseif ($jenis === "user") {  ?>
                             <div class="row">
@@ -224,6 +226,10 @@ if ($error) {  ?>
     </script>
     <script>
         removeSpace();
+    </script>
+    <script>
+        CKEDITOR.replace('detail');
+        CKEDITOR.addCss('.cke_editable { background-color: #31363c ; color: white }');
     </script>
 <?php } ?>
 

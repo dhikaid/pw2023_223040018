@@ -117,7 +117,9 @@
                             </div>
                         </div>
                     </div>
+                    <small>Total <b><?= count($products); ?></b> Products</small>
                     <div class="containers-product h-60-vh overflow-y-scroll overflow-x-hidden">
+
                         <table class="table text-light">
                             <thead>
                                 <tr class="sticky-top bg-dark">
@@ -170,6 +172,7 @@
                             </div>
                         </div>
                     </div>
+                    <small>Total <b><?= count($categories); ?></b> Categories</small>
                     <div class="containers-category h-60-vh overflow-y-scroll overflow-x-hidden">
                         <table class="table text-light">
                             <thead>
@@ -206,6 +209,32 @@
                 </div>
                 <!-- Purchase -->
                 <div class="tab-pane fade" id="list-purchase" role="tabpanel" aria-labelledby="list-purchase-list">
+                    <div class="row mb-3">
+                        <div class="col-sm">
+                            <div class="card text-bg-success mb-3 h-100">
+                                <div class="card-header"><small>Success</small></div>
+                                <div class="card-body">
+                                    <h5 class="card-title fw-bold"><?= priceRp(pajak($sucessPurchase, 0.11) + $sucessPurchase); ?></h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <div class="card text-bg-warning mb-3 h-100">
+                                <div class="card-header"><small>Pending</small></div>
+                                <div class="card-body">
+                                    <h5 class="card-title fw-bold"><?= priceRp(pajak($PendingPurchase, 0.11) + $PendingPurchase); ?></h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <div class="card text-bg-danger mb-3 h-100">
+                                <div class="card-header"><small>Cancel</small></div>
+                                <div class="card-body">
+                                    <h5 class="card-title fw-bold"><?= priceRp(pajak($CancelPurchase, 0.11) + $CancelPurchase); ?></h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-6">
                             <div class="input-group mb-3">
@@ -303,6 +332,8 @@
                             </div>
                         </div>
                     </div>
+
+                    <small>Total <b><?= count($users); ?></b> Users</small>
                     <div class="containers-user h-60-vh overflow-y-scroll overflow-x-hidden">
                         <table class="table text-light">
                             <thead>

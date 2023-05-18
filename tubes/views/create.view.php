@@ -115,5 +115,9 @@
 <script>
     removeSpace();
 </script>
+<script>
+    CKEDITOR.replace('detail');
+    CKEDITOR.addCss('.cke_editable { background-color: #31363c ; color: white }');
+</script>
 
 <?php require('partials/footer.php'); ?>

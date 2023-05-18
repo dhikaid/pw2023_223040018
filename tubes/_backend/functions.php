@@ -33,7 +33,6 @@ function dbConn()
     return mysqli_connect($hostDB, $userDB, $passDB, $nameDB);
 }
 
-
 // FUNCTION
 
 function timeTambah($tanggal, $tambah)
@@ -251,14 +250,14 @@ function edit($data, $jenis, $id)
 
 
     if ($jenis === "prod") {
-        $detail = htmlspecialchars($data['detail']);
+        $detail = $data['detail'];
         $price = htmlspecialchars($data['price']);
         $category = htmlspecialchars($data['idcategory']);
         $ukuran = htmlspecialchars($data['idukuran']);
         // mysqli
         $query = "UPDATE product SET product ='$name', img='$gambar',detail='$detail', price='$price', id_category='$category', id_ukuran = '$ukuran' WHERE id_product = $id";
     } elseif ($jenis === "categ") {
-        $detail = htmlspecialchars($data['detail']);
+        $detail = $data['detail'];
         $query = "UPDATE category SET category = '$name' , img='$gambar', detail ='$detail' WHERE id_category = '$id'";
     } elseif ($jenis === "user") {
         $name = strtolower(str_replace(' ', '', $name));
