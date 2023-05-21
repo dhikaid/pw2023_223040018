@@ -54,7 +54,7 @@ if ($jenis === 'purch') {
                     <td>
                         <!-- Example split danger button -->
                         <div class="btn-group">
-                            <a href="edit?jen=user&id=<?= $user['id_users']; ?>" type="button" class="btn btn-danger">
+                            <a href="edit?jen=user&id=<?= $user['id_users']; ?>" type="button" class="badge text-bg-danger">
                                 Action
                             </a>
                         </div>
@@ -82,19 +82,32 @@ if ($jenis === 'purch') {
             <?php endif; ?>
             <?php
             $i = 1;
-            foreach ($keyword as $product) : ?>
+            foreach ($keyword as $product) : $ratings = ratingProduct($product['id_product']); ?>
                 <tr>
                     <th scope="row"><?= $i++; ?></th>
                     <td>
                         <img src="_backend/image/product/<?= $product['img']; ?>" width="50" alt="" class="img-fluid rounded" />
                     </td>
 
-                    <td><?= $product['product']; ?></td>
+
+                    <td><?= $product['product']; ?>
+                        <div class="mt-2 mb-2">
+                            <?php if ($ratings['ratings']) : ?>
+                                <small>
+                                    <?php for ($j = 0; $j < $ratings['ratingVIEW']; $j++) :  ?><i class="bi bi-star-fill"></i>
+                                    <?php endfor; ?>
+                                    / 5 (<?= $ratings['ratingreview']; ?> reviews) </small>
+                            <?php else : ?>
+                                <small>
+                                    Belum ada rating</small>
+                            <?php endif; ?>
+                        </div>
+                    </td>
                     <td><?php echo priceRp($product['price']) ?></td>
                     <td>
                         <!-- Example split danger button -->
                         <div class="btn-group">
-                            <a href="edit?&jen=prod&id=<?= $product['id_product']; ?>" type="button" class="btn btn-danger">
+                            <a href="edit?&jen=prod&id=<?= $product['id_product']; ?>" type="button" class="badge text-bg-danger">
                                 Action
                             </a>
                         </div>
@@ -131,7 +144,7 @@ if ($jenis === 'purch') {
                     <td>
                         <!-- Example split danger button -->
                         <div class="btn-group">
-                            <a href="edit?&jen=categ&id=<?= $category['id_category']; ?>" type="button" class="btn btn-danger">
+                            <a href="edit?&jen=categ&id=<?= $category['id_category']; ?>" type="button" class="badge text-bg-danger">
                                 Action
                             </a>
                         </div>
@@ -168,6 +181,7 @@ if ($jenis === 'purch') {
 <?php } elseif ($jenis === 'purch') { ?>
 
     <?php
+
     foreach ($keyword as $purchase) {
     ?>
         <div class="card bg-dark mb-3">
@@ -183,9 +197,10 @@ if ($jenis === 'purch') {
             <?php } ?>
             <?php
             // productnya
-            $productPurchaces = query("SELECT product.product, transaksi_detail.price as tprice, product.price as pprice, product.img, transaksi_detail.ukuran, transaksi_detail.qty FROM product, transaksi_detail WHERE product.id_product = transaksi_detail.id_product AND transaksi_detail.id_transaksi = '$purchase[id_transaksi]'");
+            $productPurchaces = query("SELECT product.product, transaksi_detail.price as tprice, product.price as pprice, product.img, transaksi_detail.ukuran, transaksi_detail.qty , product.id_product FROM product, transaksi_detail WHERE product.id_product = transaksi_detail.id_product AND transaksi_detail.id_transaksi = '$purchase[id_transaksi]'");
             $totalPriceP = 0;
             foreach ($productPurchaces as $ppurchase) {
+                $ratingproduct = query("SELECT feedback.* FROM feedback, transaksi, product WHERE transaksi.id_transaksi = feedback.id_transaksi AND feedback.id_product = product.id_product AND transaksi.id_transaksi = '$purchase[id_transaksi]' AND product.id_product = '$ppurchase[id_product]'");
                 $totalPriceP = $totalPriceP + $ppurchase['tprice'];
             ?>
 
@@ -196,10 +211,24 @@ if ($jenis === 'purch') {
                         </div>
                         <div class="col-10">
                             <div>
-                                <?= $ppurchase['product']; ?> (<?= $ppurchase['ukuran']; ?>) <br>
+                                <a target="_blank" href="detail?jen=prod&id=<?= $ppurchase['id_product']; ?>&invoice=<?= $purchase['id_transaksi']; ?>"> <?= $ppurchase['product']; ?> (<?= $ppurchase['ukuran']; ?>)</a> <br>
                                 <small><?= priceRp($ppurchase['pprice']); ?> (<i>x<?= $ppurchase['qty']; ?>)</i></small>
                                 <br>
                             </div>
+                            <?php if (!$ratingproduct) :
+                            ?>
+                                <div class="">
+                                    <small> <a class="badge text-bg-primary" href="detail?jen=prod&id=<?= $ppurchase['id_product']; ?>&invoice=<?= $purchase['id_transaksi']; ?>" target="_blank">Berikan Ulasan</a></small>
+                                </div>
+                            <?php else : ?>
+                                <div class="">
+                                    <small>
+                                        Your review :
+                                        <?php for ($j = 0; $j < $ratingproduct[0]['feedback_rating']; $j++) :  ?> <i class="bi bi-star-fill"></i>
+                                        <?php endfor; ?>
+                                        / 5 </small>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -233,5 +262,6 @@ if ($jenis === 'purch') {
         </div>
     <?php
     } ?>
+
 
 <?php } ?>

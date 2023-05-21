@@ -529,8 +529,8 @@ function search($keyword, $jenis)
         $filter = "AND category.id_category = $keyFilter";
     }
     if (isset($keyword['page'])) {
-        $page = $keyword['page'];
-        $keyword = $keyword['keyword'];
+        $page = htmlspecialchars($keyword['page']);
+        $keyword = htmlspecialchars($keyword['keyword']);
         $pagination = true;
     }
 
@@ -546,7 +546,7 @@ function search($keyword, $jenis)
         $query = "SELECT id_category, img, category FROM category WHERE category LIKE '%$keyword%'";
     }
     if ($pagination) {
-        $paginationResult = pagination($query, $page);
+        $paginationResult = pagination($query, 12, $page);
         $query = $paginationResult['query'];
         $page = $paginationResult['page'];
     } else {
@@ -565,10 +565,10 @@ function search($keyword, $jenis)
     ];
 }
 
-function pagination($data, $halaman)
+function pagination($data, $data2, $halaman)
 {
 
-    $jumlahDataHalaman = 12;
+    $jumlahDataHalaman = $data2;
     // mysqli
     $jumlahData = count(query($data));
 
@@ -884,5 +884,55 @@ function resetPass($data, $token)
     mysqli_query($db, "DELETE FROM user_token WHERE token = '$token' ");
     return [
         'success' => true,
+    ];
+}
+
+
+function submitRating($data)
+{
+
+    $db = dbConn();
+
+    $iduser = htmlspecialchars($data['user']);
+    $invoice = htmlspecialchars($data['invoice']);
+    $product = htmlspecialchars($data['product']);
+    $text = htmlspecialchars($data['feedback']);
+    $rating = htmlspecialchars($data['rating']);
+    $date =  date('Y-m-d H:i:s');
+    mysqli_query($db, "INSERT INTO feedback VALUES ('$invoice', '$product', '$text', '$rating', '$date')");
+    if (mysqli_affected_rows($db) > 0) {
+        return [
+            "error" => false,
+            "message" => "Sukses",
+        ];
+    }
+
+    return [
+        "error" => true,
+        "message" => "Gagal",
+    ];
+}
+
+
+function ratingProduct($id)
+{
+    $ratingVIEW = 0;
+    $ratings = false;
+    $ratingcount = 0;
+    if ($rating = query("SELECT feedback_rating FROM feedback, product WHERE feedback.id_product = product.id_product AND product.id_product = '$id'")) {
+        $ratingcount = count($rating);
+        $ratings = true;
+        foreach ($rating as $rate) {
+            $ratingVIEW = $ratingVIEW + $rate['feedback_rating'];
+        }
+
+        $ratingVIEW = round($ratingVIEW / count($rating));
+    }
+
+    return [
+        'error' => false,
+        'ratings' => $ratings,
+        'ratingVIEW' => $ratingVIEW,
+        'ratingreview' => "$ratingcount",
     ];
 }

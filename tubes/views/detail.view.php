@@ -26,6 +26,17 @@ if ($error) {  ?>
                 <div class="col-sm-1"></div>
                 <div class="col-sm-5 pt-3">
                     <h2 class="fw-bold"><?= $product['product']; ?></h2>
+                    <div class="mt-2 mb-2">
+                        <?php if ($ratings['ratings']) : ?>
+                            <small>
+                                <?php for ($j = 0; $j < $ratings['ratingVIEW']; $j++) :  ?><i class="bi bi-star-fill"></i>
+                                <?php endfor; ?>
+                                / 5 (<?= $ratings['ratingreview']; ?> reviews) </small>
+                        <?php else : ?>
+                            <small>
+                                Belum ada rating</small>
+                        <?php endif; ?>
+                    </div>
                     <h4><?= priceRp($product['price']); ?></h4>
                     <p><i class="bi bi-tag-fill"></i> <?= $product['category']; ?></p>
                     <p>
@@ -55,6 +66,52 @@ if ($error) {  ?>
                                 </div>
                             </div>
                         </form>
+
+                        <div class="rating-form mt-3">
+                            <?php if ($formRating) : ?>
+                                <div class="bg-dark p-3 rounded form-feedback-rating mb-3">
+                                    <form action="" name="feedback-rating">
+                                        <p>Kirim feedback mu!</p>
+                                        <div class="rating mb-2">
+                                            <input type="hidden" class="d-none invoice-value" value="<?= $invoice; ?>" required>
+                                            <input type="hidden" class="d-none invoice-product" value="<?= $product['id_product']; ?>" required>
+                                            <?php for ($i = 1; $i <= 5; $i++) { ?>
+                                                <input class="d-none rating-input" type="radio" id="star<?= $i; ?>" name="rating" value="<?= $i; ?>">
+                                                <label class="bi bi-star stars-rating" for="star<?= $i; ?>"></label>
+                                            <?php }; ?>
+                                        </div>
+                                        <textarea class="form-control invoice-feedback" aria-label="With textarea" style="resize: none !important;"></textarea>
+                                        <button type="submit" class="btn badge text-bg-light mt-3 " id="btn-badge-rating">Send</button>
+                                    </form>
+                                </div>
+                            <?php endif; ?>
+                            <div class="accordion accordion-flush " id="accordionFlushExample">
+                                <div class="accordion-item ">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                            Reviews
+                                        </button>
+                                    </h2>
+                                    <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                        <div class="mt-3">
+                                            <div class="rating-view"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- PATI -->
+                            <!-- <div class="content-php">
+                            </div>
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                    <li class="page-item"><a class="page-link" href="#" onclick="clickPage(1)">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#" onclick="clickPage(2)">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                </ul>
+                            </nav> -->
+                        </div>
                     </div>
                 </div>
                 <section class="suggestion pt-5">
@@ -63,7 +120,7 @@ if ($error) {  ?>
                         <hr class="border border-secondary border-3 opacity-75">
 
                         <div class="row row-cols-2 row-cols-md-6 g-4">
-                            <?php foreach ($productsRand as $pRand) : ?>
+                            <?php foreach ($productsRand as $pRand) : $ratings = ratingProduct($pRand['id_product']); ?>
 
                                 <div class="col pt-3 ">
                                     <a href="detail?jen=prod&id=<?= $pRand['id_product']; ?>">
@@ -71,6 +128,17 @@ if ($error) {  ?>
                                             <img src="_backend/image/product/<?= $pRand['img']; ?>" class="card-img-top" alt="...">
                                             <div class="card-body">
                                                 <p class="card-title"><?= $pRand['product']; ?></p>
+                                                <div class="mt-2 mb-2">
+                                                    <?php if ($ratings['ratings']) : ?>
+                                                        <small>
+                                                            <?php for ($j = 0; $j < $ratings['ratingVIEW']; $j++) :  ?><i class="bi bi-star-fill"></i>
+                                                            <?php endfor; ?>
+                                                            / 5 </small>
+                                                    <?php else : ?>
+                                                        <small>
+                                                            Belum ada rating</small>
+                                                    <?php endif; ?>
+                                                </div>
                                                 <p class="card-text"><b><?= priceRp($pRand['price']); ?></b></p>
                                             </div>
                                             <div class="card-footer">
@@ -137,13 +205,24 @@ if ($error) {  ?>
                     </form>
 
                     <div class="row row-cols-2 row-cols-md-3 g-4 ">
-                        <?php foreach ($pcategories as $categ) : ?>
+                        <?php foreach ($pcategories as $categ) :  $ratings = ratingProduct($categ['id_product']); ?>
                             <div class="col-sm pt-3 ">
                                 <a href="detail?jen=prod&id=<?= $categ['id_product']; ?>">
                                     <div class="card bg-dark text-light rounded h-100">
                                         <img src="_backend/image/product/<?= $categ['img']; ?>" class="card-img-top" alt="...">
                                         <div class="card-body">
                                             <p class="card-title"><?= $categ['product']; ?></p>
+                                            <div class="mt-2 mb-2">
+                                                <?php if ($ratings['ratings']) : ?>
+                                                    <small>
+                                                        <?php for ($j = 0; $j < $ratings['ratingVIEW']; $j++) :  ?><i class="bi bi-star-fill"></i>
+                                                        <?php endfor; ?>
+                                                        / 5 </small>
+                                                <?php else : ?>
+                                                    <small>
+                                                        Belum ada rating</small>
+                                                <?php endif; ?>
+                                            </div>
                                             <p class="card-text"><b><?= priceRp($categ['price']); ?></b></p>
 
                                         </div>
@@ -195,6 +274,19 @@ if ($error) {  ?>
 <?php if (isset($_SESSION['login'])) : ?>
     <script>
         buyProduct(<?= $userDp['id_users']; ?>);
+        $(document).ready(function() {
+            $.ajax({ //create an ajax request to display.php
+                type: "GET",
+                url: "_backend/feedback.php?idprod=<?= $id; ?>",
+                dataType: "html", //expect html to be returned                
+                success: function(response) {
+                    $(".rating-view").html(response);
+                    //alert(response);
+                }
+            })
+        });
+
+        submitRating(<?= $userDp['id_users']; ?>);
     </script>
 <?php endif; ?>
 

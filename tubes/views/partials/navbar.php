@@ -25,7 +25,7 @@ $headerCateg = query("SELECT category, id_category FROM category"); ?>
                 <li class="nav-item">
                     <?php if ($login) { ?>
                         <div class="dropdown">
-                            <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button class="btn btn-outline-light dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-person-circle"></i> <?= strtoupper($userDp['username']); ?>
                             </button>
                             <ul class="dropdown-menu">

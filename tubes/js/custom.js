@@ -331,3 +331,90 @@ function discord_message(kode, username, message) {
   };
   return "OK!";
 }
+
+// rating function
+
+function submitRating(data) {
+  var checkboxes = document.querySelectorAll(".rating-input");
+  var ratingLabels = document.querySelectorAll(".stars-rating");
+  var previousRating = 0;
+  var invoice = document.querySelector(".invoice-value");
+  var product = document.querySelector(".invoice-product");
+  var feedback = document.querySelector(".invoice-feedback");
+  var formRATING = document.forms["feedback-rating"];
+  var btnRating = document.getElementById("btn-badge-rating");
+  var cardRating = document.querySelector(".form-feedback-rating");
+
+  checkboxes.forEach(function (checkbox, index) {
+    checkbox.addEventListener("change", function () {
+      var currentRating = index + 1;
+
+      for (var i = 0; i < ratingLabels.length; i++) {
+        if (currentRating <= i) {
+          ratingLabels[i].classList.remove("bi-star-fill");
+          ratingLabels[i].classList.add("bi-star");
+        } else {
+          ratingLabels[i].classList.remove("bi-star");
+          ratingLabels[i].classList.add("bi-star-fill");
+        }
+      }
+
+      previousRating = currentRating;
+      console.log(previousRating);
+    });
+  });
+
+  formRATING.addEventListener("submit", function (e) {
+    e.preventDefault();
+    console.log(data);
+
+    if (
+      previousRating !== 0 &&
+      product.value !== "" &&
+      invoice.value !== "" &&
+      feedback.value !== ""
+    ) {
+      btnRating.disabled = true;
+      feedback.disabled = true;
+      checkboxes.forEach(function (checkbox, index) {
+        checkbox.disabled = true;
+      });
+      $.post("_backend/feedback.php", {
+        user: data,
+        invoice: invoice.value,
+        product: product.value,
+        feedback: feedback.value,
+        rating: previousRating,
+      }).done(function (response) {
+        $(".content-feedback").html(response);
+        // formRATING.reset();
+        cardRating.classList.add("d-none");
+        $(document).ready(function () {
+          $.ajax({
+            //create an ajax request to display.php
+            type: "GET",
+            url: "_backend/feedback.php?idprod=" + product.value,
+            dataType: "html", //expect html to be returned
+            success: function (response) {
+              $(".rating-view").html(response);
+              //alert(response);
+            },
+          });
+        });
+      });
+    }
+  });
+}
+
+function feedbackPage(data1, data2) {
+  $.ajax({
+    //create an ajax request to display.php
+    type: "GET",
+    url: "_backend/feedback.php?idprod=" + data1 + "&page=" + data2,
+    dataType: "html", //expect html to be returned
+    success: function (response) {
+      $(".rating-view").html(response);
+      //alert(response);
+    },
+  });
+}

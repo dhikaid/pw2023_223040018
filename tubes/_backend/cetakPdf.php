@@ -73,11 +73,18 @@ if ($jenis === 'prod') {
             <th>Product</th>
             <th>Price</th>
             <th>Category</th>
-            <th>ID</th>
+            <th>Rating</th>
         </tr>';
 
     $i = 1;
     foreach ($query as $prod) {
+        $ratings = ratingProduct($prod['id_product']);
+        if ($ratings['ratings']) {
+            $rating = "$ratings[ratingVIEW] / 5 ($ratings[ratingreview] reviews) ";
+        } else {
+            $rating = 'Belum ada rating';
+        }
+
         $html .= '
     <tr>
         <td>' . $i++ . '</td>
@@ -85,7 +92,7 @@ if ($jenis === 'prod') {
         <td>' . $prod['product'] . '</td>
         <td>' . priceRp($prod['price']) . '</td>
         <td>' . $prod['category'] . '</td>
-        <td>' . $prod['id_product'] . '</td>
+        <td>' . $rating . '</td>
     </tr>
     ';
     }

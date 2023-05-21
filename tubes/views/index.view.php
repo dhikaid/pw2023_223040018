@@ -46,13 +46,24 @@
         <hr class="border border-secondary border-3 opacity-75">
 
         <div class="row row-cols-2 row-cols-md-6 g-4">
-            <?php foreach ($products as $product) : ?>
+            <?php foreach ($products as $product) : $ratings = ratingProduct($product['id_product']); ?>
                 <div class="col pt-3 ">
                     <a href="detail?jen=prod&id=<?= $product['id_product']; ?>">
                         <div class="card bg-dark text-light rounded h-100">
                             <img src="_backend/image/product/<?= $product['img']; ?>" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <p class="card-title"><?= $product['product']; ?></p>
+                                <div class="mt-2 mb-2">
+                                    <?php if ($ratings['ratings']) : ?>
+                                        <small>
+                                            <?php for ($j = 0; $j < $ratings['ratingVIEW']; $j++) :  ?><i class="bi bi-star-fill"></i>
+                                            <?php endfor; ?>
+                                            / 5 </small>
+                                    <?php else : ?>
+                                        <small>
+                                            Belum ada rating</small>
+                                    <?php endif; ?>
+                                </div>
                                 <p class="card-text"><b><?= priceRp($product['price']); ?></b></p>
                             </div>
                             <div class="card-footer">

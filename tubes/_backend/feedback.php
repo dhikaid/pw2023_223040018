@@ -1,0 +1,109 @@
+<?php
+// cek login
+session_start();
+
+require 'functions.php';
+
+// POST
+if (isset($_POST['invoice'])) {
+    if (!isset($_SESSION['login']) && !isset($_SESSION['ids']) && !isset($_SESSION['rls'])) {
+        header("Location: login");
+        exit();
+    }
+    $iduser = $_POST['user'];
+    $invoice = $_POST['invoice'];
+    $product = $_POST['product'];
+    $feedback = $_POST['feedback'];
+    $rating = $_POST['rating'];
+    if (isset($iduser) && isset($invoice) && isset($product) && isset($feedback) && isset($rating)) {
+        if ($iduser === $_SESSION['ids']) {
+            $submit = submitRating($_POST);
+            echo $submit['message'];
+            die();
+        }
+        echo $_SESSION['ids'];
+    }
+}
+
+// view
+$page = 1;
+if (isset($_GET['idprod'])) {
+    $idprod = $_GET['idprod'];
+    $feedbackSQL = "SELECT feedback.*, users.img, users.username FROM feedback, product, transaksi, users WHERE feedback.id_transaksi = transaksi.id_transaksi AND transaksi.id_users = users.id_users AND feedback.id_product = product.id_product AND product.id_product = '$idprod'";
+    if (isset($_GET['page'])) {
+        $page = $_GET['page'];
+    }
+    $paginationFeedback = pagination($feedbackSQL, 1, $page);
+    $feedback = query($paginationFeedback['query']);
+}
+
+
+?>
+
+<?php if (isset($_GET['idprod'])) : ?>
+    <?php if ($feedback) : ?>
+
+        <?php foreach ($feedback as $feed) : ?>
+            <div class="card bg-dark mb-3">
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-1 me-3">
+                            <div class="text-center">
+                                <img src="_backend/image/user/<?= $feed['img']; ?>" class="rounded-circle" width="40" alt="...">
+                            </div>
+                        </div>
+                        <div class="col">
+
+
+                            <b> @<?= $feed['username']; ?></b>
+                            <br>
+                            <div class="">
+
+                                <small>
+                                    <?php for ($i = 0; $i < $feed['feedback_rating']; $i++) :  ?><i class="bi bi-star-fill"></i>
+                                    <?php endfor; ?>
+                                    / 5 </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-feedback ">
+                        <p><?= $feed['feedback_text']; ?></p>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+        <div class="mt-3">
+            <ul class="pagination justify-content-center ">
+
+                <?php if ($page > 1) : ?>
+                    <li class="page-item">
+                        <a class="page-link" href="?page=<?= $page - 1; ?>" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                <?php endif; ?>
+
+                <!-- FOR -->
+                <?php for ($i = 1; $i <= $paginationFeedback['page']; $i++) : ?>
+                    <?php if ($page == $i) : ?>
+                        <li class="page-item active"><button class="page-link" onclick="feedbackPage(<?= $idprod; ?>,<?= $i; ?>)"><?= $i; ?></button></li>
+                    <?php else : ?>
+                        <li class="page-item"><button class="page-link" onclick="feedbackPage(<?= $idprod; ?>,<?= $i; ?>)"><?= $i; ?></button></li>
+                    <?php endif; ?>
+                <?php endfor; ?>
+                <?php if ($page < $paginationFeedback['page']) : ?>
+                    <li class="page-item">
+                        <a class="page-link" href="?page=<?= $page + 1; ?>" aria-label="Previous">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                <?php endif; ?>
+            </ul>
+        </div>
+    <?php else : ?>
+        <div class="text-center">
+            Tidak ada review.
+        </div>
+    <?php endif; ?>
+<?php endif; ?>
+<script src="js/custom.js"></script>
