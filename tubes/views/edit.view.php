@@ -36,44 +36,47 @@ if ($error) {  ?>
             <?php endif; ?>
             <div class="row">
                 <form action="" method="POST" enctype="multipart/form-data">
-                    <div class="col">
+                    <div class="col placeholder-wave">
                         <!-- default -->
 
                         <!-- berjenis -->
                         <?php if ($jenis === "prod") { ?>
-                            <div class="row">
+                            <div class="row mb-5">
                                 <div class="col-sm-2">
                                     <div class="col-sm-2 mt-4">
                                         <i>Preview Image</i><br>
-                                        <img class="rounded img-preview" src="_backend/image/product/<?= $products['img']; ?>" width="120" alt="">
+                                        <div class="placeholder rounded" style="width: 120px; height: 120px;">
+                                            <img class="rounded img-preview" src="_backend/image/product/<?= $products['img']; ?>" width="120" alt="">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-sm">
-                                    <div class="mb-3 mt-5">
+                                    <div class="mb-3 mt-5 ">
                                         <input type="hidden" name="gambar_lama" value="<?= $products['img']; ?>">
-                                        <label for="exampleFormControlInput1" class="form-label">Gambar :</label>
-                                        <input type="file" name="gambar" class="form-control bg-dark img-upload" onchange="previewImage()" />
+                                        <label for="exampleFormControlInput1" class="form-label ">Gambar :</label>
+                                        <input type="file" name="gambar" class=" form-control bg-dark img-upload placeholder" onchange="previewImage()" />
                                     </div>
                                 </div>
                             </div>
 
                             <div class="mb-3 mt-5">
                                 <label for="exampleFormControlInput1" class="form-label">Name :</label>
-                                <input type="text" name="nama" class="form-control bg-dark" required value="<?= $products['product']; ?>" />
+                                <input type="text" name="nama" class="form-control bg-dark placeholder" required value="<?= $products['product']; ?>" />
                             </div>
-                            <div class="mb-3 mt-5">
+                            <div class="mb-3 mt-5 ">
                                 <label for="exampleFormControlInput1" class="form-label">Detail :</label>
                                 <!-- <textarea type="textarea" name="detail" class="form-control bg-dark" required /></textarea> -->
-                                <textarea name="detail" rows="100" cols="80" id="detail"><?php echo $products['detail']; ?></textarea>
-
+                                <div class="placeholder" style="height: 300px;">
+                                    <textarea name="detail" rows="100" cols="80" id="detail"><?php echo $products['detail']; ?></textarea>
+                                </div>
                             </div>
                             <div class="mb-3 mt-5">
                                 <label for="exampleFormControlInput1" class="form-label">Price :</label>
-                                <input type="number" name="price" class="form-control bg-dark" value="<?= $products['price']; ?>" required />
+                                <input type="number" name="price" class="form-control bg-dark placeholder" value="<?= $products['price']; ?>" required />
                             </div>
                             <div class="mb-3 mt-5">
                                 <label for="exampleFormControlInput1" class="form-label">Category :</label>
-                                <select class="form-select bg-dark" name="idcategory" required>
+                                <select class="form-select bg-dark placeholder" name="idcategory" required>
                                     <?php foreach ($category as $categ) :
                                         if ($products['id_category'] === $categ['id_category']) {
                                     ?>
@@ -86,7 +89,7 @@ if ($error) {  ?>
                             </div>
                             <div class="mb-3 mt-5">
                                 <label for="exampleFormControlInput1" class="form-label">Ukuran :</label>
-                                <select class="form-select bg-dark" name="idukuran" required>
+                                <select class="form-select bg-dark placeholder" name="idukuran" required>
                                     <?php foreach ($ukurans as $ukuran) :
                                         if ($products['id_ukuran'] === $ukuran['id_ukuran']) {
                                     ?>
@@ -102,64 +105,70 @@ if ($error) {  ?>
                                 <div class="col-sm-2">
                                     <div class="col-sm-2 mt-4">
                                         <i>Preview Image</i><br>
-                                        <img class="rounded img-preview" src="_backend/image/category/<?= $category['img']; ?>" width="120" alt="">
+                                        <div class="placeholder rounded" style="width: 120px; height: 120px;">
+                                            <img class="rounded img-preview" src="_backend/image/category/<?= $category['img']; ?>" width="120" alt="">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-sm">
                                     <div class="mb-3 mt-5">
                                         <input type="hidden" name="gambar_lama" value="<?= $category['img']; ?>">
                                         <label for="exampleFormControlInput1" class="form-label">Gambar :</label>
-                                        <input type="file" name="gambar" class="form-control bg-dark img-upload" onchange="previewImage()" />
+                                        <input type="file" name="gambar" class="form-control bg-dark img-upload placeholder" onchange="previewImage()" />
                                     </div>
                                 </div>
                             </div>
                             <div class="mb-3 mt-5">
                                 <label for="exampleFormControlInput1" class="form-label">Name :</label>
-                                <input type="text" name="nama" class="form-control bg-dark" required value="<?= $category['category']; ?>" />
+                                <input type="text" name="nama" class="form-control bg-dark placeholder" required value="<?= $category['category']; ?>" />
                             </div>
                             <div class="mb-3 mt-5">
                                 <label for="exampleFormControlInput1" class="form-label">Detail :</label>
-                                <textarea type="textarea" name="detail" class="form-control bg-dark" required /><?php echo $category['detail']; ?></textarea>
+                                <div class="placeholder" style="height: 300px;">
+                                    <textarea name="detail" rows="100" cols="80" id="detail"><?php echo $category['detail']; ?></textarea>
+                                </div>
                             </div>
                         <?php } elseif ($jenis === "user") {  ?>
                             <div class="row">
                                 <div class="col-sm-2">
                                     <div class="col-sm-2 mt-4">
                                         <i>Preview Image</i><br>
-                                        <img class="rounded img-preview" src="_backend/image/user/<?= $user['img']; ?>" width="120" alt="">
+                                        <div class="placeholder rounded" style="width: 120px; height: 120px;">
+                                            <img class="rounded img-preview" src="_backend/image/user/<?= $user['img']; ?>" width="120" alt="">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-sm">
                                     <div class="mb-3 mt-5">
                                         <input type="hidden" name="gambar_lama" value="<?= $user['img']; ?>">
                                         <label for="exampleFormControlInput1" class="form-label">Gambar :</label>
-                                        <input type="file" name="gambar" class="form-control bg-dark img-upload" onchange="previewImage()" />
+                                        <input type="file" name="gambar" class="form-control bg-dark img-upload placeholder" onchange="previewImage()" />
                                     </div>
                                 </div>
                             </div>
                             <div class="mb-3 mt-5">
                                 <label for="exampleFormControlInput1" class="form-label">Name :</label>
-                                <input type="text" name="nama" class="form-control bg-dark usernameInput" required value="<?= $user['username']; ?>" />
+                                <input type="text" name="nama" class="form-control bg-dark usernameInput placeholder" required value="<?= $user['username']; ?>" />
                             </div>
                             <div class="mb-3 mt-5">
                                 <label for="exampleFormControlInput1" class="form-label">Email :</label>
-                                <input type="email" name="email" class="form-control bg-dark" required value="<?= $user['email']; ?>" />
+                                <input type="email" name="email" class="form-control bg-dark placeholder" required value="<?= $user['email']; ?>" />
                             </div>
                             <div class=" mb-3 mt-5">
                                 <label for="exampleFormControlInput1" class="form-label">Password :</label>
-                                <input type="password" name="password" class="form-control bg-dark" />
+                                <input type="password" name="password" class="form-control bg-dark placeholder" />
                             </div>
                             <div class=" mb-3 mt-5">
                                 <label for="exampleFormControlInput1" class="form-label">Address :</label>
-                                <input type="address" name="address" class="form-control bg-dark" required value="<?= $user['address']; ?>" />
+                                <input type="address" name="address" class="form-control bg-dark placeholder" required value="<?= $user['address']; ?>" />
                             </div>
                             <div class="mb-3 mt-5">
                                 <label for="exampleFormControlInput1" class="form-label">Date of Birth :</label>
-                                <input type="date" name="date" class="form-control bg-dark" required value="<?= $user['tgl_lahir']; ?>" />
+                                <input type="date" name="date" class="form-control bg-dark placeholder" required value="<?= $user['tgl_lahir']; ?>" />
                             </div>
                             <div class="mb-3 mt-5">
                                 <label for="exampleFormControlInput1" class="form-label">Role :</label>
-                                <select class="form-select bg-dark" name="idrole" required>
+                                <select class="form-select bg-dark placeholder" name="idrole" required>
                                     <?php foreach ($roles as $role) :
                                         if ($user['urole'] === $role['id_role']) {
                                     ?>
@@ -171,9 +180,9 @@ if ($error) {  ?>
                                 </select>
                             </div>
                         <?php } ?>
-                        <button type="submit" class="btn btn-outline-light float-end" name="create">Update</button>
-                        <button type="button" class=" btn btn-danger float-end me-2" onclick="showAlert()">Delete</button>
-                        <button type="button" class="btn btn-primary float-end me-2" onclick="history.back();">Back</button>
+                        <button type="submit" class="btn btn-outline-light float-end placeholder" name="create">Update</button>
+                        <button type="button" class=" btn btn-danger float-end me-2 placeholder" onclick="showAlert()">Delete</button>
+                        <button type="button" class="btn btn-primary float-end me-2 placeholder" onclick="history.back();">Back</button>
                     </div>
                 </form>
             </div>
@@ -225,11 +234,12 @@ if ($error) {  ?>
         }
     </script>
     <script>
+        skeletonLoading();
+
         removeSpace();
     </script>
     <script>
-        CKEDITOR.replace('detail');
-        CKEDITOR.addCss('.cke_editable { background-color: #31363c ; color: white }');
+
     </script>
 <?php } ?>
 

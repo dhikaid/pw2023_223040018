@@ -19,14 +19,14 @@ if ($error) {  ?>
     <!-- Produk -->
     <?php if ($jenis === "prod") { ?>
         <section class="pt-6 product-detail container pb-5">
-            <div class="row">
-                <div class="col-sm-6 pt-3">
+            <div class="row placeholder-wave">
+                <div class="col-sm-6 pt-3 placeholder rounded">
                     <img src="_backend/image/product/<?= $product['img']; ?>" class="img-fluid rounded" alt="..." />
                 </div>
                 <div class="col-sm-1"></div>
                 <div class="col-sm-5 pt-3">
-                    <h2 class="fw-bold"><?= $product['product']; ?></h2>
-                    <div class="mt-2 mb-2">
+                    <h2 class="fw-bold placeholder"><?= $product['product']; ?></h2>
+                    <div class="mt-2 mb-2 placeholder">
                         <?php if ($ratings['ratings']) : ?>
                             <small>
                                 <?php for ($j = 0; $j < $ratings['ratingVIEW']; $j++) :  ?><i class="bi bi-star-fill"></i>
@@ -37,14 +37,14 @@ if ($error) {  ?>
                                 Belum ada rating</small>
                         <?php endif; ?>
                     </div>
-                    <h4><?= priceRp($product['price']); ?></h4>
-                    <p><i class="bi bi-tag-fill"></i> <?= $product['category']; ?></p>
-                    <p>
+                    <h4 class="placeholder"><?= priceRp($product['price']); ?></h4>
+                    <p class="placeholder"><i class="bi bi-tag-fill"></i> <?= $product['category']; ?></p>
+                    <div class="placeholder mb-3">
                         <?= $product['detail']; ?>
-                    </p>
-                    <div class="d-grid gap-2">
+                    </div>
+                    <div class="d-grid gap-2 ">
                         <form action="" method="POST" name="buyProduct">
-                            <select class="form-select bg-dark mb-3 ukuran" aria-label="Default select example">
+                            <select class="form-select bg-dark mb-3 ukuran placeholder" aria-label="Default select example">
                                 <option value="<?= $product['ukuran1']; ?>"><?= $product['ukuran1']; ?></option>
                                 <option value="<?= $product['ukuran2']; ?>"><?= $product['ukuran2']; ?></option>
                                 <option value="<?= $product['ukuran3']; ?>"><?= $product['ukuran3']; ?></option>
@@ -52,16 +52,16 @@ if ($error) {  ?>
                                 <option value="<?= $product['ukuran5']; ?>"><?= $product['ukuran5']; ?></option>
                             </select>
                             <div class="row">
-                                <div class="col-2">
+                                <div class="col-2 ">
                                     <input type="hidden" class="d-none product-id" value="<?= $product['id_product']; ?>">
-                                    <input type="number" min="1" class="form-control text-center bg-dark qty-buy" value="1" required>
+                                    <input type="number " min="1" class="form-control text-center bg-dark qty-buy placeholder" value="1" required>
                                 </div>
 
                                 <div class="col-10">
                                     <?php if (isset($_SESSION['login'])) { ?>
-                                        <button type="submit" class="btn btn-outline-light d-block w-100 submit-cart-detail"><i class="bi bi-cart-fill"></i> Buy Now</button>
+                                        <button type="submit" class="btn btn-outline-light d-block w-100 submit-cart-detail placeholder"><i class="bi bi-cart-fill"></i> Buy Now</button>
                                     <?php } else { ?>
-                                        <a href="login" class="btn btn-outline-light d-block w-100 submit-cart-detail"><i class="bi bi-cart-fill"></i> Buy Now</a>
+                                        <a href="login" class="btn btn-outline-light d-block w-100 submit-cart-detail placeholder"><i class="bi bi-cart-fill"></i> Buy Now</a>
                                     <?php } ?>
                                 </div>
                             </div>
@@ -71,35 +71,34 @@ if ($error) {  ?>
                             <?php if ($formRating) : ?>
                                 <div class="bg-dark p-3 rounded form-feedback-rating mb-3">
                                     <form action="" name="feedback-rating">
-                                        <p>Kirim feedback mu!</p>
-                                        <div class="rating mb-2">
+                                        <p class="placeholder">Kirim feedback mu!</p>
+                                        <div class="rating mb-2 placeholder">
                                             <input type="hidden" class="d-none invoice-value" value="<?= $invoice; ?>" required>
                                             <input type="hidden" class="d-none invoice-product" value="<?= $product['id_product']; ?>" required>
                                             <?php for ($i = 1; $i <= 5; $i++) { ?>
-                                                <input class="d-none rating-input" type="radio" id="star<?= $i; ?>" name="rating" value="<?= $i; ?>">
+                                                <input class="d-none rating-input " type="radio" id="star<?= $i; ?>" name="rating" value="<?= $i; ?>">
                                                 <label class="bi bi-star stars-rating" for="star<?= $i; ?>"></label>
                                             <?php }; ?>
                                         </div>
-                                        <textarea class="form-control invoice-feedback" aria-label="With textarea" style="resize: none !important;"></textarea>
-                                        <button type="submit" class="btn badge text-bg-light mt-3 " id="btn-badge-rating">Send</button>
+                                        <textarea class="form-control invoice-feedback placeholder" aria-label="With textarea" style="resize: none !important;"></textarea>
+                                        <button type="submit" class="btn badge text-bg-light mt-3 placeholder" id="btn-badge-rating">Send</button>
                                     </form>
                                 </div>
                             <?php endif; ?>
                             <div class="accordion accordion-flush " id="accordionFlushExample">
-                                <div class="accordion-item ">
+                                <div class="accordion-item">
                                     <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                        <button class="accordion-button collapsed bg-dark placeholder" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                                             Reviews
                                         </button>
                                     </h2>
                                     <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                        <div class="mt-3">
+                                        <div class="accordion-body mt-3">
                                             <div class="rating-view"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                             <!-- PATI -->
                             <!-- <div class="content-php">
                             </div>
@@ -120,15 +119,17 @@ if ($error) {  ?>
                         <hr class="border border-secondary border-3 opacity-75">
 
                         <div class="row row-cols-2 row-cols-md-6 g-4">
-                            <?php foreach ($productsRand as $pRand) : $ratings = ratingProduct($pRand['id_product']); ?>
-
-                                <div class="col pt-3 ">
-                                    <a href="detail?jen=prod&id=<?= $pRand['id_product']; ?>">
-                                        <div class="card bg-dark text-light rounded h-100">
-                                            <img src="_backend/image/product/<?= $pRand['img']; ?>" class="card-img-top" alt="...">
+                            <?php foreach ($productsRand as $categ) :  $ratings = ratingProduct($categ['id_product']); ?>
+                                <div class="col-sm pt-3 ">
+                                    <a href="detail?jen=prod&id=<?= $categ['id_product']; ?>">
+                                        <div class="card bg-dark text-light rounded h-100 placeholder-wave">
+                                            <div class="placeholder">
+                                                <img src="_backend/image/product/<?= $categ['img']; ?>" class="card-img-top 
+                                        " alt="...">
+                                            </div>
                                             <div class="card-body">
-                                                <p class="card-title"><?= $pRand['product']; ?></p>
-                                                <div class="mt-2 mb-2">
+                                                <p class="card-title placeholder"><?= $categ['product']; ?></p>
+                                                <div class="mt-2 mb-2 placeholder">
                                                     <?php if ($ratings['ratings']) : ?>
                                                         <small>
                                                             <?php for ($j = 0; $j < $ratings['ratingVIEW']; $j++) :  ?><i class="bi bi-star-fill"></i>
@@ -139,15 +140,15 @@ if ($error) {  ?>
                                                             Belum ada rating</small>
                                                     <?php endif; ?>
                                                 </div>
-                                                <p class="card-text"><b><?= priceRp($pRand['price']); ?></b></p>
+                                                <p class="card-text placeholder"><b><?= priceRp($categ['price']); ?></b></p>
+
                                             </div>
-                                            <div class="card-footer">
-                                                <small class=""><i class="bi bi-tag-fill"></i> <?= $pRand['category']; ?></small>
+                                            <div class="card-footer ">
+                                                <small class="placeholder"><i class="bi bi-tag-fill"></i> <?= $categ['category']; ?></small>
                                             </div>
                                         </div>
                                     </a>
                                 </div>
-
                             <?php endforeach; ?>
                         </div>
                     </div>
@@ -178,11 +179,13 @@ if ($error) {  ?>
     <?php } elseif ($jenis === "categ") { ?>
         <section class="pt-6 category-detail container pb-5">
             <div class="row">
-                <div class="col-sm pt-4">
-                    <img src="_backend/image/category/<?= $category['img']; ?>" class="img-fluid rounded">
-                    </img>
-                    <h2 class="mt-3 fw-bold"><?= $category['category']; ?></h2>
-                    <p class="mt-3"><?= $category['detail']; ?></p>
+                <div class="col-sm pt-4 placeholder-wave ">
+                    <div class="placeholder rounded">
+                        <img src="_backend/image/category/<?= $category['img']; ?>" class="img-fluid rounded">
+                        </img>
+                    </div>
+                    <h2 class="mt-3 fw-bold placeholder"><?= $category['category']; ?></h2>
+                    <div class="mt-3 placeholder"><?= $category['detail']; ?></div>
                     <hr>
                 </div>
 
@@ -208,11 +211,14 @@ if ($error) {  ?>
                         <?php foreach ($pcategories as $categ) :  $ratings = ratingProduct($categ['id_product']); ?>
                             <div class="col-sm pt-3 ">
                                 <a href="detail?jen=prod&id=<?= $categ['id_product']; ?>">
-                                    <div class="card bg-dark text-light rounded h-100">
-                                        <img src="_backend/image/product/<?= $categ['img']; ?>" class="card-img-top" alt="...">
+                                    <div class="card bg-dark text-light rounded h-100 placeholder-wave">
+                                        <div class="placeholder">
+                                            <img src="_backend/image/product/<?= $categ['img']; ?>" class="card-img-top 
+                                        " alt="...">
+                                        </div>
                                         <div class="card-body">
-                                            <p class="card-title"><?= $categ['product']; ?></p>
-                                            <div class="mt-2 mb-2">
+                                            <p class="card-title placeholder"><?= $categ['product']; ?></p>
+                                            <div class="mt-2 mb-2 placeholder">
                                                 <?php if ($ratings['ratings']) : ?>
                                                     <small>
                                                         <?php for ($j = 0; $j < $ratings['ratingVIEW']; $j++) :  ?><i class="bi bi-star-fill"></i>
@@ -223,11 +229,11 @@ if ($error) {  ?>
                                                         Belum ada rating</small>
                                                 <?php endif; ?>
                                             </div>
-                                            <p class="card-text"><b><?= priceRp($categ['price']); ?></b></p>
+                                            <p class="card-text placeholder"><b><?= priceRp($categ['price']); ?></b></p>
 
                                         </div>
-                                        <div class="card-footer">
-                                            <small class=""><i class="bi bi-tag-fill"></i> <?= $categ['category']; ?></small>
+                                        <div class="card-footer ">
+                                            <small class="placeholder"><i class="bi bi-tag-fill"></i> <?= $categ['category']; ?></small>
                                         </div>
                                     </div>
                                 </a>
@@ -273,6 +279,7 @@ if ($error) {  ?>
 
 <?php if (isset($_SESSION['login'])) : ?>
     <script>
+        skeletonLoading();
         buyProduct(<?= $userDp['id_users']; ?>);
         $(document).ready(function() {
             $.ajax({ //create an ajax request to display.php

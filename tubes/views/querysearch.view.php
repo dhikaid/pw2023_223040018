@@ -49,15 +49,17 @@
             <p class="text-center">Data not found.</p>
         <?php } else { ?>
             <div class="row row-cols-2 row-cols-md-6 g-4">
-                <?php foreach ($keywords as $product) : $ratings = ratingProduct($product['id_product']);  ?>
-
+                <?php foreach ($keywords as $product) :  $ratings = ratingProduct($product['id_product']); ?>
                     <div class="col-sm pt-3 ">
                         <a href="detail?jen=prod&id=<?= $product['id_product']; ?>">
-                            <div class="card bg-dark text-light rounded h-100">
-                                <img src="_backend/image/product/<?= $product['img']; ?>" class="card-img-top" alt="...">
+                            <div class="card bg-dark text-light rounded h-100 placeholder-wave">
+                                <div class="placeholder">
+                                    <img src="_backend/image/product/<?= $product['img']; ?>" class="card-img-top 
+                                        " alt="...">
+                                </div>
                                 <div class="card-body">
-                                    <p class="card-title"><?= $product['product']; ?></p>
-                                    <div class="mt-2 mb-2">
+                                    <p class="card-title placeholder"><?= $product['product']; ?></p>
+                                    <div class="mt-2 mb-2 placeholder">
                                         <?php if ($ratings['ratings']) : ?>
                                             <small>
                                                 <?php for ($j = 0; $j < $ratings['ratingVIEW']; $j++) :  ?><i class="bi bi-star-fill"></i>
@@ -68,15 +70,15 @@
                                                 Belum ada rating</small>
                                         <?php endif; ?>
                                     </div>
-                                    <p class="card-text"><b><?= priceRp($product['price']); ?></b></p>
+                                    <p class="card-text placeholder"><b><?= priceRp($product['price']); ?></b></p>
+
                                 </div>
-                                <div class="card-footer">
-                                    <small class=""><i class="bi bi-tag-fill"></i> <?= $product['category']; ?></small>
+                                <div class="card-footer ">
+                                    <small class="placeholder"><i class="bi bi-tag-fill"></i> <?= $product['category']; ?></small>
                                 </div>
                             </div>
                         </a>
                     </div>
-
                 <?php endforeach; ?>
 
             </div>
@@ -115,6 +117,7 @@
 
 </section>
 <script>
+    skeletonLoading();
     searchAjax1();
 </script>
 

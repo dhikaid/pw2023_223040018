@@ -286,27 +286,27 @@ function resetFilter() {
 }
 
 // FUNGSI GET STATISTIK
-// function statistikWEB() {
-//   fetch("https://ipapi.co/json/")
-//     .then((response) => response.json())
-//     .then((data) => {
-//       console.log(data.ip);
-//       discord_message(
-//         2,
-//         "Seseorang mengunjungi website anda!",
-//         "LINK :\n" +
-//           window.location.href +
-//           "\nIP :\n" +
-//           data.ip +
-//           "\nKOTA :\n" +
-//           data.city +
-//           "\nISP :\n" +
-//           data.org +
-//           "\nDEVICE :\n" +
-//           navigator.userAgent
-//       );
-//     });
-// }
+function statistikWEB() {
+  fetch("https://ipapi.co/json/")
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data.ip);
+      discord_message(
+        2,
+        "Seseorang mengunjungi website anda!",
+        "LINK :\n" +
+          window.location.href +
+          "\nIP :\n" +
+          data.ip +
+          "\nKOTA :\n" +
+          data.city +
+          "\nISP :\n" +
+          data.org +
+          "\nDEVICE :\n" +
+          navigator.userAgent
+      );
+    });
+}
 
 // FUNGSI KE DISCORD
 function discord_message(kode, username, message) {
@@ -416,5 +416,91 @@ function feedbackPage(data1, data2) {
       $(".rating-view").html(response);
       //alert(response);
     },
+  });
+}
+
+function skeletonLoading() {
+  const placeholders = document.querySelectorAll(".placeholder");
+  const placeholdersanimation = document.querySelectorAll(".placeholder-wave");
+  const img = document.querySelectorAll("img");
+  const btn = document.querySelectorAll("button");
+  const inputs = document.querySelectorAll("input");
+  const textarea = document.querySelectorAll("textarea");
+  const selects = document.querySelectorAll("select");
+
+  const links = document.querySelectorAll("a");
+  let isClickable = false;
+
+  // TAG IMG
+  img.forEach((image) => {
+    if (!image.closest("nav")) {
+      image.classList.add("opacity-0");
+    }
+  });
+
+  // TAG A
+  links.forEach((link) => {
+    link.addEventListener("click", (e) => {
+      if (!isClickable && !link.closest("nav")) {
+        e.preventDefault();
+      }
+    });
+  });
+
+  // TAG BTN
+  btn.forEach((element) => {
+    if (!element.closest("nav")) {
+      element.disabled = true;
+    }
+  });
+
+  // TAG INPUTS
+  inputs.forEach((input) => {
+    input.disabled = true;
+  });
+
+  // TAG SELECT
+  selects.forEach((select) => {
+    select.disabled = true;
+  });
+
+  // TAG TEXTAREA
+  textarea.forEach((input) => {
+    input.classList.add("opacity-0");
+  });
+
+  window.addEventListener("DOMContentLoaded", function () {
+    setTimeout(function () {
+      placeholders.forEach((element) => {
+        element.classList.remove("placeholder");
+      });
+      placeholdersanimation.forEach((element) => {
+        element.classList.remove("placeholder-wave");
+      });
+      btn.forEach((element) => {
+        if (!element.closest("nav")) {
+          element.disabled = false;
+        }
+      });
+      inputs.forEach((input) => {
+        input.disabled = false;
+      });
+      selects.forEach((select) => {
+        select.disabled = false;
+      });
+      textarea.forEach((element) => {
+        element.classList.remove("opacity-0");
+        CKEDITOR.replace("detail");
+        CKEDITOR.addCss(
+          ".cke_editable { background-color: #31363c ; color: white }"
+        );
+      });
+      img.forEach((image) => {
+        if (!image.closest("nav")) {
+          image.classList.remove("opacity-0");
+        }
+      });
+      isClickable = true;
+    }, 1500);
   });
 }

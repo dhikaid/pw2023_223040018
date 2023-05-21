@@ -180,6 +180,7 @@ if ($jenis === 'purch') {
     </div>
 <?php } elseif ($jenis === 'purch') { ?>
 
+
     <?php
 
     foreach ($keyword as $purchase) {
@@ -215,12 +216,12 @@ if ($jenis === 'purch') {
                                 <small><?= priceRp($ppurchase['pprice']); ?> (<i>x<?= $ppurchase['qty']; ?>)</i></small>
                                 <br>
                             </div>
-                            <?php if (!$ratingproduct) :
+                            <?php if (!$ratingproduct && $purchase['transaction_status'] === 'paid') :
                             ?>
                                 <div class="">
                                     <small> <a class="badge text-bg-primary" href="detail?jen=prod&id=<?= $ppurchase['id_product']; ?>&invoice=<?= $purchase['id_transaksi']; ?>" target="_blank">Berikan Ulasan</a></small>
                                 </div>
-                            <?php else : ?>
+                            <?php elseif ($ratingproduct && $purchase['transaction_status'] === 'paid') : ?>
                                 <div class="">
                                     <small>
                                         Your review :
@@ -262,6 +263,7 @@ if ($jenis === 'purch') {
         </div>
     <?php
     } ?>
+
 
 
 <?php } ?>

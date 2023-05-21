@@ -145,6 +145,24 @@ a {
   background-size: cover;
 }
 
+/* loading */
+
+.placeholder {
+  /* height: 20px !important; */
+  color: transparent !important;
+  background-color: white !important;
+  display: block !important;
+}
+
+.form-control:disabled,
+select:disabled {
+  opacity: 0.4 !important;
+}
+
+.placeholder-card-img {
+  height: 140px !important;
+}
+
 @media (max-width: 768px) {
   .login-area-card {
     width: 100% !important;
