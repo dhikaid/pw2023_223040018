@@ -13,6 +13,8 @@ if ($_SESSION['rls'] !== "u") {
 }
 
 require '_backend/functions.php';
+// Page Name
+$pageName = "My Profile";
 
 $login = false;
 

@@ -5,6 +5,7 @@ session_start();
 // Require AMBIL
 require '_backend/functions.php';
 
+
 $login = false;
 
 if (isset($_COOKIE['uid'])) {
@@ -32,20 +33,15 @@ if (isset($_GET['page']) && !empty($_GET['page'])) {
   $page = $_GET['page'];
 }
 if ($jenis === "prod") {
-  if (!$product = query("SELECT product.product, product.detail, product.price, product.img, category.category, product.id_product, ukuran.* FROM product, category,ukuran WHERE id_product = $id AND product.id_ukuran = ukuran.id_ukuran AND product.id_category = category.id_category ")[0]) {
+  if (!$product = query("SELECT product.product, product.detail, product.price, product.img, category.category, product.id_product, ukuran.* FROM product, category,ukuran WHERE id_product = $id AND product.id_ukuran = ukuran.id_ukuran AND product.id_category = category.id_category ")) {
     $error = true;
   } else {
+    // index0
+    $product = $product[0];
     $productsRand = query("SELECT product.product, product.id_product, product.price, product.img, category.category FROM product, category WHERE product.id_category = category.id_category AND product.id_product != $id ORDER BY RAND() LIMIT 6");
-
     // rating
-
     $ratings = ratingProduct($id);
-
-
-
-
     // invoice
-
     if (isset($_GET['invoice'])) {
       $invoice = $_GET['invoice'];
       if (query("SELECT transaksi.id_transaksi, product.id_product FROM transaksi, transaksi_detail, users, pembayaran, product WHERE users.id_users = transaksi.id_users AND transaksi.id_transaksi = transaksi_detail.id_transaksi AND transaksi_detail.id_product = product.id_product AND transaksi.id_transaksi = pembayaran.id_transaksi AND pembayaran.transaction_status = 'paid' AND transaksi.id_transaksi = '$invoice' AND transaksi.id_users = '$userDp[id_users]' AND product.id_product = '$id'")) {
@@ -54,18 +50,24 @@ if ($jenis === "prod") {
         }
       }
     }
+    $pageName = $product['product'];
   }
 } elseif ($jenis === "categ") {
-  if (!$category = query("SELECT img, detail, category FROM category WHERE id_category = $id ")[0]) {
+  if (!$category = query("SELECT img, detail, category FROM category WHERE id_category = $id ")) {
     $error = true;
   } else {
-
+    // categories index 0;
+    $category = $category[0];
     // page
     $queryPagi = "SELECT product.product, product.id_product, product.price, product.img, category.category FROM product, category WHERE category.id_category = $id AND product.id_category = category.id_category";
     $paginationCateg = pagination($queryPagi, 6, $page);
     $pcategories = query($paginationCateg['query']);
+    $pageName = $category['category'];
   }
 }
+
+// Page Name
+$pageName = $pageName;
 
 // header category
 $headerCateg = query("SELECT category, id_category FROM category");

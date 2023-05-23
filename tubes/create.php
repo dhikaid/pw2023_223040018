@@ -13,6 +13,9 @@ if (!isset($_SESSION['login']) && !isset($_SESSION['ids']) && !isset($_SESSION['
 // Require AMBIL
 require '_backend/functions.php';
 
+// Page Name
+$pageName = 'Create';
+
 $login = false;
 
 if (isset($_COOKIE['uid'])) {

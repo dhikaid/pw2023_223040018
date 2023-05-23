@@ -2,6 +2,8 @@
 // cek login
 session_start();
 require '_backend/functions.php';
+// Page Name
+$pageName = "Log In";
 
 // cek cookie 
 if (isset($_COOKIE['id']) && isset($_COOKIE['uid'])) {

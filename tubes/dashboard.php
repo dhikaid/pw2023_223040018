@@ -16,6 +16,9 @@ if ($_SESSION['rls'] !== "a") {
 // Require AMBIL
 require '_backend/functions.php';
 
+// Page Name
+$pageName = 'Dashboard';
+
 $login = false;
 
 if (isset($_COOKIE['uid'])) {

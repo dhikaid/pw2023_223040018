@@ -13,6 +13,8 @@ if (!isset($_SESSION['login']) && !isset($_SESSION['ids']) && !isset($_SESSION['
 // Require AMBIL
 require '_backend/functions.php';
 
+
+
 $login = false;
 
 if (isset($_COOKIE['uid'])) {
@@ -44,6 +46,8 @@ if ($jenis === "prod") {
   } else {
     $products = $products[0];
     $ukurans = query("SELECT * from ukuran");
+    // Page Name
+    $pageName = "Edit: $products[product]";
   }
   $category = query("SELECT id_category, category FROM category");
 } elseif ($jenis === "user") {
@@ -51,6 +55,8 @@ if ($jenis === "prod") {
     $error = true;
   } else {
     $user = $user[0];
+    // Page Name
+    $pageName = "Edit: $user[username]";
   }
 
 
@@ -60,6 +66,8 @@ if ($jenis === "prod") {
     $error = true;
   } else {
     $category = $category[0];
+    // Page Name
+    $pageName = "Edit: $category[category]";
   }
 }
 

@@ -13,7 +13,7 @@
 
                         <tr>
                             <td>
-                                <div class="placeholder rounded"><img src="_backend/image/product/<?= $trks['img']; ?>" width="50" class="rounded" alt=""></div>
+                                <div class="placeholder rounded"><img src="_backend/image/product/<?= $trks['img']; ?>" width="50" class="rounded opacity-0" alt=""></div>
                             </td>
                             <td> <a class="placeholder" href="detail?jen=prod&id=<?= $trks['id_product']; ?>"><?= $trks['product']; ?> (<?= $trks['ukuran']; ?>) </a></td>
                             <td><small class="placeholder">x<?= $trks['qty']; ?></small></td>

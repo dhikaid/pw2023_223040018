@@ -1,10 +1,18 @@
+<?php
+header('Cache-Control: no-cache, no-store, must-revalidate');
+header('Pragma: no-cache');
+header('Expires: 0');
+?>
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Nike | Just Do It.</title>
+    <title> <?= $pageName; ?> | Nike. Just Do It. </title>
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" href="img/nav-logo.png">
 
     <!-- BS LOKAL -->
     <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
@@ -17,6 +25,7 @@
 
     <!-- BS ICO -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="https://unpkg.com/placeholder-loading/dist/css/placeholder-loading.min.css">
 
     <!-- GOOGLE FONT -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

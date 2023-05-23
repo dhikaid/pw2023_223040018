@@ -51,7 +51,7 @@
                     <a href="detail?jen=prod&id=<?= $product['id_product']; ?>">
                         <div class="card bg-dark text-light rounded h-100 placeholder-wave">
                             <div class="placeholder">
-                                <img src="_backend/image/product/<?= $product['img']; ?>" class="card-img-top 
+                                <img src="_backend/image/product/<?= $product['img']; ?>" class="opacity-0 card-img-top 
                                         " alt="...">
                             </div>
                             <div class="card-body">
@@ -94,7 +94,7 @@
                     <a href="detail?jen=categ&id=<?= $category['id_category']; ?>">
                         <div class="card text-bg-dark">
                             <div class="placeholder rounded card-img">
-                                <img src="_backend/image/category/<?= $category['img']; ?>" class="card-img" alt="...">
+                                <img src="_backend/image/category/<?= $category['img']; ?>" class="card-img opacity-0" alt="...">
                             </div>
                             <div class="card-img-overlay placeholder">
                                 <h4 class="card-title fw-bold"><?= $category['category']; ?></h4>

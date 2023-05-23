@@ -2,7 +2,8 @@
 // cek login
 session_start();
 require '_backend/functions.php';
-
+// Page Name
+$pageName = "Forget Password";
 // cek cookie 
 if (isset($_COOKIE['id']) && isset($_COOKIE['uid'])) {
     cookie($_COOKIE);

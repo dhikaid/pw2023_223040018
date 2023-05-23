@@ -6,6 +6,9 @@ session_start();
 // Require AMBIL
 require '_backend/functions.php';
 
+// Page Name
+$pageName = "Home";
+
 $login = false;
 
 if (isset($_COOKIE['uid'])) {

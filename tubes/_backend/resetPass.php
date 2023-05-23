@@ -10,6 +10,7 @@ if (isset($_POST['reset'])) {
 // Import PHPMailer classes into the global namespace
 // These must be at the top of your script, not inside a function
 use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 //Load composer's autoloader
@@ -439,9 +440,9 @@ if ($reset['error'] == false) {
     header("Location: ../forgot?return=success&rmessage=$reset[message]");
     exit();
   } catch (Exception $e) {
-    header("Location: ../forgot?return=success&rmessage={$mail->ErrorInfo}");
+    mysqli_query(dbConn(), "DELETE FROM user_token WHERE id_users = '$reset[id_users]'");
+    header("Location: ../forgot?return=error&rmessage={$mail->ErrorInfo}");
     exit();
-    echo 'Mailer Error: ' . $mail->ErrorInfo;
   }
 } else {
   header("Location: ../forgot?return=error&rmessage=$reset[message]");

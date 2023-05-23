@@ -46,7 +46,7 @@ if ($error) {  ?>
                                     <div class="col-sm-2 mt-4">
                                         <i>Preview Image</i><br>
                                         <div class="placeholder rounded" style="width: 120px; height: 120px;">
-                                            <img class="rounded img-preview" src="_backend/image/product/<?= $products['img']; ?>" width="120" alt="">
+                                            <img class="rounded img-preview opacity-0" src="_backend/image/product/<?= $products['img']; ?>" width="120" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -106,7 +106,7 @@ if ($error) {  ?>
                                     <div class="col-sm-2 mt-4">
                                         <i>Preview Image</i><br>
                                         <div class="placeholder rounded" style="width: 120px; height: 120px;">
-                                            <img class="rounded img-preview" src="_backend/image/category/<?= $category['img']; ?>" width="120" alt="">
+                                            <img class="rounded img-preview opacity-0" src="_backend/image/category/<?= $category['img']; ?>" width="120" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -134,7 +134,7 @@ if ($error) {  ?>
                                     <div class="col-sm-2 mt-4">
                                         <i>Preview Image</i><br>
                                         <div class="placeholder rounded" style="width: 120px; height: 120px;">
-                                            <img class="rounded img-preview" src="_backend/image/user/<?= $user['img']; ?>" width="120" alt="">
+                                            <img class="rounded img-preview opacity-0" src="_backend/image/user/<?= $user['img']; ?>" width="120" alt="">
                                         </div>
                                     </div>
                                 </div>

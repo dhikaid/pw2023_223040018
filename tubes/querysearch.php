@@ -28,6 +28,9 @@ if (!isset($_GET) || empty($_GET['keyword']) || empty($_GET['page']) || !is_nume
 $keyword = $_GET['keyword'];
 $page = $_GET['page'];
 
+// Page Name
+$pageName = "Search: $keyword";
+
 $searchKeyword = search($_GET, 'prod');
 $keywords = $searchKeyword['query'];
 

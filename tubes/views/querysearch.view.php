@@ -54,7 +54,7 @@
                         <a href="detail?jen=prod&id=<?= $product['id_product']; ?>">
                             <div class="card bg-dark text-light rounded h-100 placeholder-wave">
                                 <div class="placeholder">
-                                    <img src="_backend/image/product/<?= $product['img']; ?>" class="card-img-top 
+                                    <img src="_backend/image/product/<?= $product['img']; ?>" class="card-img-top opacity-0 
                                         " alt="...">
                                 </div>
                                 <div class="card-body">

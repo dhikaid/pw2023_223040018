@@ -1,8 +1,10 @@
 <?php
 
 // SETTINGAN AWAL
-
 date_default_timezone_set('Asia/Jakarta');
+
+// Default Page 
+$pageName = '404';
 
 // SMTP
 $SMTPhost = '';
@@ -815,6 +817,7 @@ function tokenResetPass($data)
             $url = base_url() . "forgot?reset=" . $url['token'];
             return [
                 'error' => false,
+                'id_users' => $query[0]['id_users'],
                 'username' => $query[0]['username'],
                 'email' => $query[0]['email'],
                 'url' => $url,

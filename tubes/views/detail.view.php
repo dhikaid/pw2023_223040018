@@ -18,13 +18,15 @@ if ($error) {  ?>
 
     <!-- Produk -->
     <?php if ($jenis === "prod") { ?>
-        <section class="pt-6 product-detail container pb-5">
-            <div class="row placeholder-wave">
-                <div class="col-sm-6 pt-3 placeholder rounded">
-                    <img src="_backend/image/product/<?= $product['img']; ?>" class="img-fluid rounded" alt="..." />
+        <section class="pt-5 product-detail container pb-5">
+            <div class="row ">
+                <div class="col-sm-6 pt-3 placeholder-wave rounded">
+                    <div class="placeholder rounded">
+                        <img src="_backend/image/product/<?= $product['img']; ?>" class="img-fluid rounded opacity-0" alt="..." />
+                    </div>
                 </div>
                 <div class="col-sm-1"></div>
-                <div class="col-sm-5 pt-3">
+                <div class="col-sm-5 pt-3 placeholder-wave">
                     <h2 class="fw-bold placeholder"><?= $product['product']; ?></h2>
                     <div class="mt-2 mb-2 placeholder">
                         <?php if ($ratings['ratings']) : ?>
@@ -124,7 +126,7 @@ if ($error) {  ?>
                                     <a href="detail?jen=prod&id=<?= $categ['id_product']; ?>">
                                         <div class="card bg-dark text-light rounded h-100 placeholder-wave">
                                             <div class="placeholder">
-                                                <img src="_backend/image/product/<?= $categ['img']; ?>" class="card-img-top 
+                                                <img src="_backend/image/product/<?= $categ['img']; ?>" class="opacity-0 card-img-top 
                                         " alt="...">
                                             </div>
                                             <div class="card-body">
@@ -181,7 +183,7 @@ if ($error) {  ?>
             <div class="row">
                 <div class="col-sm pt-4 placeholder-wave ">
                     <div class="placeholder rounded">
-                        <img src="_backend/image/category/<?= $category['img']; ?>" class="img-fluid rounded">
+                        <img src="_backend/image/category/<?= $category['img']; ?>" class="img-fluid rounded opacity-0">
                         </img>
                     </div>
                     <h2 class="mt-3 fw-bold placeholder"><?= $category['category']; ?></h2>
@@ -213,7 +215,7 @@ if ($error) {  ?>
                                 <a href="detail?jen=prod&id=<?= $categ['id_product']; ?>">
                                     <div class="card bg-dark text-light rounded h-100 placeholder-wave">
                                         <div class="placeholder">
-                                            <img src="_backend/image/product/<?= $categ['img']; ?>" class="card-img-top 
+                                            <img src="_backend/image/product/<?= $categ['img']; ?>" class="card-img-top opacity-0
                                         " alt="...">
                                         </div>
                                         <div class="card-body">
@@ -276,25 +278,26 @@ if ($error) {  ?>
         </section>
 <?php }
 } ?>
-
+<script>
+    skeletonLoading();
+    $(document).ready(function() {
+        $.ajax({ //create an ajax request to display.php
+            type: "GET",
+            url: "_backend/feedback.php?idprod=<?= $id; ?>",
+            dataType: "html", //expect html to be returned                
+            success: function(response) {
+                $(".rating-view").html(response);
+                //alert(response);
+            }
+        })
+    });
+</script>
 <?php if (isset($_SESSION['login'])) : ?>
     <script>
-        skeletonLoading();
         buyProduct(<?= $userDp['id_users']; ?>);
-        $(document).ready(function() {
-            $.ajax({ //create an ajax request to display.php
-                type: "GET",
-                url: "_backend/feedback.php?idprod=<?= $id; ?>",
-                dataType: "html", //expect html to be returned                
-                success: function(response) {
-                    $(".rating-view").html(response);
-                    //alert(response);
-                }
-            })
-        });
-
         submitRating(<?= $userDp['id_users']; ?>);
     </script>
 <?php endif; ?>
+
 
 <?php require('partials/footer.php'); ?>

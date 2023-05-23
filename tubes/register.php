@@ -8,7 +8,8 @@ if (isset($_SESSION['login']) && isset($_SESSION['ids']) && isset($_SESSION['rls
 }
 
 require '_backend/functions.php';
-
+// Page Name
+$pageName = "Register";
 $error = true;
 if (isset($_POST['register'])) {
   $error = register($_POST, NULL);
