@@ -5,7 +5,7 @@ define('BASE_URL', '/pw2023_223040018/kuliah/pertemuan12/');
 function koneksi()
 {
   // Koneksi ke DB
-  $conn = mysqli_connect('localhost', 'root', '', 'pw2023_223040018') or die('Koneksi Gagal!');
+  $conn = mysqli_connect('localhost', 'root', '', 'pw2023_223040018') or die('Koneksi Database Gagal!');
 
   return $conn;
 }

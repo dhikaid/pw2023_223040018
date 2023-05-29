@@ -17,7 +17,7 @@
 </footer>
 
 <script>
-    statistikWEB();
+    // statistikWEB();
 </script>
 </body>
 

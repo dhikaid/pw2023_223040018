@@ -4,7 +4,7 @@ $name = 'Home';
 
 
 // Koneksi ke DB
-$conn = mysqli_connect('localhost', 'root', '', 'pw2023_223040018') or die('Koneksi Gagal!');
+$conn = mysqli_connect('localhost', 'root', '', 'pw2023_223040018') or die('Koneksi Database Gagal!');
 
 // Query Table Mahasiswa
 $result = mysqli_query($conn, "SELECT * FROM mahasiswa") or die(mysqli_error($conn));
