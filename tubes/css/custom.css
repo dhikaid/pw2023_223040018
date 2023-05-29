@@ -146,10 +146,12 @@ a {
 }
 
 /* loading */
-
+.placeholder,
+.placeholder i {
+  color: transparent !important;
+}
 .placeholder {
   /* height: 20px !important; */
-  color: transparent !important;
   background-color: white !important;
   display: block !important;
 }

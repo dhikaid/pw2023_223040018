@@ -30,10 +30,8 @@ if ($error) {  ?>
                     <h2 class="fw-bold placeholder"><?= $product['product']; ?></h2>
                     <div class="mt-2 mb-2 placeholder">
                         <?php if ($ratings['ratings']) : ?>
-                            <small>
-                                <?php for ($j = 0; $j < $ratings['ratingVIEW']; $j++) :  ?><i class="bi bi-star-fill"></i>
-                                <?php endfor; ?>
-                                / 5 (<?= $ratings['ratingreview']; ?> reviews) </small>
+                            <p> <i class="bi bi-star-fill text-light"></i><b> <?= $ratings['ratingVIEW']; ?></b> (<?= $ratings['ratingreview']; ?> reviews)</p>
+
                         <?php else : ?>
                             <small>
                                 Belum ada rating</small>
@@ -91,11 +89,11 @@ if ($error) {  ?>
                                 <div class="accordion-item">
                                     <h2 class="accordion-header">
                                         <button class="accordion-button collapsed bg-dark placeholder" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                            Reviews
+                                            Reviews (<?= $ratings['ratingreview']; ?> reviews)
                                         </button>
                                     </h2>
                                     <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                        <div class="accordion-body mt-3">
+                                        <div class="mt-3">
                                             <div class="rating-view"></div>
                                         </div>
                                     </div>
@@ -121,7 +119,7 @@ if ($error) {  ?>
                         <hr class="border border-secondary border-3 opacity-75">
 
                         <div class="row row-cols-2 row-cols-md-6 g-4">
-                            <?php foreach ($productsRand as $categ) :  $ratings = ratingProduct($categ['id_product']); ?>
+                            <?php foreach ($productsRand as $categ) :  $ratingsSugest = ratingProduct($categ['id_product']); ?>
                                 <div class="col-sm pt-3 ">
                                     <a href="detail?jen=prod&id=<?= $categ['id_product']; ?>">
                                         <div class="card bg-dark text-light rounded h-100 placeholder-wave">
@@ -132,11 +130,8 @@ if ($error) {  ?>
                                             <div class="card-body">
                                                 <p class="card-title placeholder"><?= $categ['product']; ?></p>
                                                 <div class="mt-2 mb-2 placeholder">
-                                                    <?php if ($ratings['ratings']) : ?>
-                                                        <small>
-                                                            <?php for ($j = 0; $j < $ratings['ratingVIEW']; $j++) :  ?><i class="bi bi-star-fill"></i>
-                                                            <?php endfor; ?>
-                                                            / 5 </small>
+                                                    <?php if ($ratingsSugest['ratings']) : ?>
+                                                        <small> <i class="bi bi-star-fill text-light"></i><b> <?= $ratingsSugest['ratingVIEW']; ?></b></small>
                                                     <?php else : ?>
                                                         <small>
                                                             Belum ada rating</small>
@@ -177,6 +172,22 @@ if ($error) {  ?>
                 </div>
             </div>
         </div>
+
+
+        <!-- off canvas -->
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+            <div class="offcanvas-header bg-dark">
+                <h5 class="offcanvas-title " id="offcanvasRightLabel">
+                    <?= $product['product']; ?> <br>
+                    <small> <i class="bi bi-star-fill text-light"></i><b> <?= $ratings['ratingVIEW']; ?></b> (<?= $ratings['ratingreview']; ?> reviews)</small>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body overflow-y-scroll justify-content-center">
+                <div class="ratingViewOffCanvas"></div>
+            </div>
+        </div>
+
 
     <?php } elseif ($jenis === "categ") { ?>
         <section class="pt-6 category-detail container pb-5">
@@ -222,10 +233,7 @@ if ($error) {  ?>
                                             <p class="card-title placeholder"><?= $categ['product']; ?></p>
                                             <div class="mt-2 mb-2 placeholder">
                                                 <?php if ($ratings['ratings']) : ?>
-                                                    <small>
-                                                        <?php for ($j = 0; $j < $ratings['ratingVIEW']; $j++) :  ?><i class="bi bi-star-fill"></i>
-                                                        <?php endfor; ?>
-                                                        / 5 </small>
+                                                    <small> <i class="bi bi-star-fill text-light"></i><b> <?= $ratings['ratingVIEW']; ?></b></small>
                                                 <?php else : ?>
                                                     <small>
                                                         Belum ada rating</small>

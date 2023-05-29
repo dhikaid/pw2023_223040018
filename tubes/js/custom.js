@@ -410,10 +410,15 @@ function feedbackPage(data1, data2) {
   $.ajax({
     //create an ajax request to display.php
     type: "GET",
-    url: "_backend/feedback.php?idprod=" + data1 + "&page=" + data2,
+    url:
+      "_backend/feedback.php?idprod=" +
+      data1 +
+      "&page=" +
+      data2 +
+      "&canvas=true",
     dataType: "html", //expect html to be returned
     success: function (response) {
-      $(".rating-view").html(response);
+      $(".ratingViewOffCanvas").html(response);
       //alert(response);
     },
   });

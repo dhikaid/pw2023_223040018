@@ -23,7 +23,7 @@ $MIDproduction = false;
 // DATABASE
 function base_url()
 {
-    return 'http://localhost/pw2023_223040018/tubes/';
+    return '';
 }
 
 function dbConn()
@@ -929,7 +929,7 @@ function ratingProduct($id)
             $ratingVIEW = $ratingVIEW + $rate['feedback_rating'];
         }
 
-        $ratingVIEW = round($ratingVIEW / count($rating));
+        $ratingVIEW = $ratingVIEW / count($rating);
     }
 
     return [

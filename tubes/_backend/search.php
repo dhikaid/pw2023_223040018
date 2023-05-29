@@ -93,10 +93,7 @@ if ($jenis === 'purch') {
                     <td><?= $product['product']; ?>
                         <div class="mt-2 mb-2">
                             <?php if ($ratings['ratings']) : ?>
-                                <small>
-                                    <?php for ($j = 0; $j < $ratings['ratingVIEW']; $j++) :  ?><i class="bi bi-star-fill"></i>
-                                    <?php endfor; ?>
-                                    / 5 (<?= $ratings['ratingreview']; ?> reviews) </small>
+                                <small> <i class="bi bi-star-fill text-light"></i><b> <?= $ratings['ratingVIEW']; ?></b> (<?= $ratings['ratingreview']; ?> reviews)</small>
                             <?php else : ?>
                                 <small>
                                     Belum ada rating</small>
@@ -223,11 +220,8 @@ if ($jenis === 'purch') {
                                 </div>
                             <?php elseif ($ratingproduct && $purchase['transaction_status'] === 'paid') : ?>
                                 <div class="">
-                                    <small>
-                                        Your review :
-                                        <?php for ($j = 0; $j < $ratingproduct[0]['feedback_rating']; $j++) :  ?> <i class="bi bi-star-fill"></i>
-                                        <?php endfor; ?>
-                                        / 5 </small>
+                                    Your review :
+                                    <small> <i class="bi bi-star-fill text-light"></i><b> <?= $ratingproduct[0]['feedback_rating']; ?></b></small>
                                 </div>
                             <?php endif; ?>
                         </div>

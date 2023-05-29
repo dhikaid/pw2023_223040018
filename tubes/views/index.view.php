@@ -58,10 +58,7 @@
                                 <p class="card-title placeholder"><?= $product['product']; ?></p>
                                 <div class="mt-2 mb-2 placeholder">
                                     <?php if ($ratings['ratings']) : ?>
-                                        <small>
-                                            <?php for ($j = 0; $j < $ratings['ratingVIEW']; $j++) :  ?><i class="bi bi-star-fill"></i>
-                                            <?php endfor; ?>
-                                            / 5 </small>
+                                        <small> <i class="bi bi-star-fill text-light"></i><b> <?= $ratings['ratingVIEW']; ?></b></small>
                                     <?php else : ?>
                                         <small>
                                             Belum ada rating</small>
