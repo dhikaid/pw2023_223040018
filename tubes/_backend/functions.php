@@ -7,31 +7,31 @@ date_default_timezone_set('Asia/Jakarta');
 $pageName = '404';
 
 // SMTP
-$SMTPhost = 'ns1004757.ip-51-81-152.us';
+$SMTPhost = '';
 $SMTPauth = true;
-$SMTPname = 'no-reply';
-$SMTPusername = 'tubes@project.bhadrikais.my.id';
-$SMTPpassword = 'tubesbhadrika123';
-$SMTPsecure = 'ssl';
-$SMTPport = 465;
+$SMTPname = '';
+$SMTPusername = '';
+$SMTPpassword = '';
+$SMTPsecure = '';
+$SMTPport = 587;
 
 // MIDTRANS
-$MIDkey = 'SB-Mid-server-3KzuzM1qrlndtVfPogjq0Kcr';
+$MIDkey = '';
 $MIDproduction = false;
 
 
 // DATABASE
 function base_url()
 {
-    return 'http://localhost/pw2023_223040018/tubes/';
+    return '';
 }
 
 function dbConn()
 {
-    $hostDB = "localhost";
-    $userDB = "root";
+    $hostDB = "";
+    $userDB = "";
     $passDB = "";
-    $nameDB = "tubespw2023_3";
+    $nameDB = "";
     return mysqli_connect($hostDB, $userDB, $passDB, $nameDB);
 }
 
