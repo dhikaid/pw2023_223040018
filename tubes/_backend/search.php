@@ -92,12 +92,13 @@ if ($jenis === 'purch') {
 
                     <td><?= $product['product']; ?>
                         <div class="mt-2 mb-2">
-                            <?php if ($ratings['ratings']) : ?>
-                                <small> <i class="bi bi-star-fill text-light"></i><b> <?= $ratings['ratingVIEW']; ?></b> (<?= $ratings['ratingreview']; ?> reviews)</small>
-                            <?php else : ?>
-                                <small>
-                                    Belum ada rating</small>
-                            <?php endif; ?>
+                            <small>
+                                <?php if ($ratings['ratings']) : ?>
+                                    <i class="bi bi-star-fill text-light"></i><b> <?= $ratings['ratingVIEW']; ?></b> |
+                                <?php else : ?>
+                                <?php endif; ?>
+                                <?= SoldCount($product['id_product']); ?>
+                            </small>
                         </div>
                     </td>
                     <td><?php echo priceRp($product['price']) ?></td>

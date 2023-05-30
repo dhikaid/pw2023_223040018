@@ -55,14 +55,15 @@
                                         " alt="...">
                             </div>
                             <div class="card-body">
-                                <p class="card-title placeholder"><?= $product['product']; ?></p>
+                                <p class="card-title placeholder text-truncate"><?= $product['product']; ?></p>
                                 <div class="mt-2 mb-2 placeholder">
-                                    <?php if ($ratings['ratings']) : ?>
-                                        <small> <i class="bi bi-star-fill text-light"></i><b> <?= $ratings['ratingVIEW']; ?></b></small>
-                                    <?php else : ?>
-                                        <small>
-                                            Belum ada rating</small>
-                                    <?php endif; ?>
+                                    <small>
+                                        <?php if ($ratings['ratings']) : ?>
+                                            <i class="bi bi-star-fill text-light"></i><b> <?= $ratings['ratingVIEW']; ?></b> |
+                                        <?php else : ?>
+                                        <?php endif; ?>
+                                        <?= SoldCount($product['id_product']); ?>
+                                    </small>
                                 </div>
                                 <p class="card-text placeholder"><b><?= priceRp($product['price']); ?></b></p>
 

@@ -73,6 +73,7 @@ if ($jenis === 'prod') {
             <th>Product</th>
             <th>Price</th>
             <th>Category</th>
+            <th>Terjual</th>
             <th>Rating</th>
         </tr>';
 
@@ -92,6 +93,7 @@ if ($jenis === 'prod') {
         <td>' . $prod['product'] . '</td>
         <td>' . priceRp($prod['price']) . '</td>
         <td>' . $prod['category'] . '</td>
+        <td>' . SoldCount($prod['id_product']) . '</td>
         <td>' . $rating . '</td>
     </tr>
     ';

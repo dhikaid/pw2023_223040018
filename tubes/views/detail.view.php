@@ -29,13 +29,14 @@ if ($error) {  ?>
                 <div class="col-sm-5 pt-3 placeholder-wave">
                     <h2 class="fw-bold placeholder"><?= $product['product']; ?></h2>
                     <div class="mt-2 mb-2 placeholder">
-                        <?php if ($ratings['ratings']) : ?>
-                            <p> <i class="bi bi-star-fill text-light"></i><b> <?= $ratings['ratingVIEW']; ?></b> (<?= $ratings['ratingreview']; ?> reviews)</p>
+                        <p>
+                            <?php if ($ratings['ratings']) : ?>
+                                <i class="bi bi-star-fill text-light"></i><b> <?= $ratings['ratingVIEW']; ?></b> (<?= $ratings['ratingreview']; ?> reviews) |
 
-                        <?php else : ?>
-                            <small>
-                                Belum ada rating</small>
-                        <?php endif; ?>
+                            <?php else : ?>
+                            <?php endif; ?>
+                            <?= SoldCount($product['id_product']); ?>
+                        </p>
                     </div>
                     <h4 class="placeholder"><?= priceRp($product['price']); ?></h4>
                     <p class="placeholder"><i class="bi bi-tag-fill"></i> <?= $product['category']; ?></p>
@@ -128,14 +129,16 @@ if ($error) {  ?>
                                         " alt="...">
                                             </div>
                                             <div class="card-body">
-                                                <p class="card-title placeholder"><?= $categ['product']; ?></p>
+                                                <p class="card-title placeholder text-truncate"><?= $categ['product']; ?></p>
                                                 <div class="mt-2 mb-2 placeholder">
-                                                    <?php if ($ratingsSugest['ratings']) : ?>
-                                                        <small> <i class="bi bi-star-fill text-light"></i><b> <?= $ratingsSugest['ratingVIEW']; ?></b></small>
-                                                    <?php else : ?>
-                                                        <small>
-                                                            Belum ada rating</small>
-                                                    <?php endif; ?>
+                                                    <small>
+                                                        <?php if ($ratingsSugest['ratings']) : ?>
+                                                            <i class="bi bi-star-fill text-light"></i><b> <?= $ratingsSugest['ratingVIEW']; ?></b> |
+                                                        <?php else : ?>
+
+                                                        <?php endif; ?>
+                                                        <?= SoldCount($categ['id_product']); ?>
+                                                    </small>
                                                 </div>
                                                 <p class="card-text placeholder"><b><?= priceRp($categ['price']); ?></b></p>
 
@@ -230,14 +233,16 @@ if ($error) {  ?>
                                         " alt="...">
                                         </div>
                                         <div class="card-body">
-                                            <p class="card-title placeholder"><?= $categ['product']; ?></p>
+                                            <p class="card-title placeholder text-truncate"><?= $categ['product']; ?></p>
                                             <div class="mt-2 mb-2 placeholder">
-                                                <?php if ($ratings['ratings']) : ?>
-                                                    <small> <i class="bi bi-star-fill text-light"></i><b> <?= $ratings['ratingVIEW']; ?></b></small>
-                                                <?php else : ?>
-                                                    <small>
-                                                        Belum ada rating</small>
-                                                <?php endif; ?>
+                                                <small>
+                                                    <?php if ($ratings['ratings']) : ?>
+                                                        <i class="bi bi-star-fill text-light"></i><b> <?= $ratings['ratingVIEW']; ?></b> |
+                                                    <?php else : ?>
+
+                                                    <?php endif; ?>
+                                                    <?= SoldCount($categ['id_product']); ?>
+                                                </small>
                                             </div>
                                             <p class="card-text placeholder"><b><?= priceRp($categ['price']); ?></b></p>
 

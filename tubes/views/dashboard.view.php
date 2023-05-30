@@ -142,12 +142,13 @@
 
                                         <td><?= $product['product']; ?>
                                             <div class="mt-2 mb-2">
-                                                <?php if ($ratings['ratings']) : ?>
-                                                    <small> <i class="bi bi-star-fill text-light"></i><b> <?= $ratings['ratingVIEW']; ?></b> (<?= $ratings['ratingreview']; ?> reviews)</small>
-                                                <?php else : ?>
-                                                    <small>
-                                                        Belum ada rating</small>
-                                                <?php endif; ?>
+                                                <small>
+                                                    <?php if ($ratings['ratings']) : ?>
+                                                        <i class="bi bi-star-fill text-light"></i><b> <?= $ratings['ratingVIEW']; ?></b> |
+                                                    <?php else : ?>
+                                                    <?php endif; ?>
+                                                    <?= SoldCount($product['id_product']); ?>
+                                                </small>
                                             </div>
                                         </td>
                                         <td><?php echo priceRp($product['price']) ?></td>
@@ -219,7 +220,7 @@
                 <!-- Purchase -->
                 <div class="tab-pane fade" id="list-purchase" role="tabpanel" aria-labelledby="list-purchase-list">
                     <div class="row mb-3">
-                        <div class="col-sm">
+                        <div class="col-sm mb-3">
                             <div class="card text-bg-success mb-3 h-100">
                                 <div class="card-header"><small>Success</small></div>
                                 <div class="card-body">
@@ -227,7 +228,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm">
+                        <div class="col-sm mb-3">
                             <div class="card text-bg-warning mb-3 h-100">
                                 <div class="card-header"><small>Pending</small></div>
                                 <div class="card-body">
@@ -235,7 +236,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm">
+                        <div class="col-sm mb-3">
                             <div class="card text-bg-danger mb-3 h-100">
                                 <div class="card-header"><small>Cancel</small></div>
                                 <div class="card-body">

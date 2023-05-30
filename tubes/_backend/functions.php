@@ -939,3 +939,15 @@ function ratingProduct($id)
         'ratingreview' => "$ratingcount",
     ];
 }
+
+
+function SoldCount($id)
+{
+    $data = query("SELECT transaksi_detail.id_product FROM transaksi_detail, transaksi, pembayaran WHERE transaksi_detail.id_transaksi = transaksi.id_transaksi AND transaksi.id_transaksi = pembayaran.id_transaksi AND pembayaran.transaction_status = 'paid' AND transaksi_detail.id_product = '$id'");
+
+    $returnData = '';
+    if (count($data) > 0) {
+        $returnData = count($data) . ' Sold';
+    }
+    return $returnData;
+}
