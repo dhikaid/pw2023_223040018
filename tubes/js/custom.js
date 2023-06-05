@@ -407,6 +407,37 @@ function submitRating(data) {
 }
 
 function feedbackPage(data1, data2) {
+  const html = `
+<div class="card bg-dark mb-3">
+    <div class="card-body placeholder-wave" aria-hidden="true">
+        <div class="row mb-3">
+            <div class="col-1 me-3">
+                <div class="text-center placeholder rounded-circle" style="width:40px;">
+                    <img src="_backend/image/user/dummy.jpg" class="rounded-circle opacity-0" width="40" alt="...">
+                </div>
+            </div>
+            <div class="col ">
+                <b class="placeholder"></b>
+                <br>
+                <div >
+                    <small class="placeholder w-75">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        / 5
+                    </small>
+                </div>
+            </div>
+        </div>
+        <div class="text-feedback placeholder">
+            <p></p>
+        </div>
+    </div>
+</div>
+`;
+  $(".ratingViewOffCanvas").html(html);
   $.ajax({
     //create an ajax request to display.php
     type: "GET",
@@ -418,8 +449,10 @@ function feedbackPage(data1, data2) {
       "&canvas=true",
     dataType: "html", //expect html to be returned
     success: function (response) {
-      $(".ratingViewOffCanvas").html(response);
-      //alert(response);
+      setTimeout(function () {
+        $(".ratingViewOffCanvas").html(response);
+        //alert(response);
+      }, 2000);
     },
   });
 }
