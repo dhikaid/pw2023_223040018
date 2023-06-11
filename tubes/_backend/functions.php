@@ -707,7 +707,11 @@ function buyProduct($data)
     if (!query("SELECT * FROM transaksi_detail WHERE id_transaksi = '$transaksi[id_transaksi]' AND id_product = '$product' AND ukuran = '$ukuran'")) {
         $query = "INSERT INTO transaksi_detail VALUES('$transaksi[id_transaksi]','$product','$qty','$price', '$ukuran')";
     } else {
-        $query = "UPDATE transaksi_detail SET qty = '$qty' , id_product = '$product' , price = '$price', ukuran = '$ukuran' WHERE id_transaksi = '$transaksi[id_transaksi]' AND id_product = '$product'";
+        if (!query("SELECT transaksi_detail.qty FROM transaksi_detail WHERE transaksi_detail.id_transaksi = '$transaksi[id_transaksi]' AND transaksi_detail.id_product = '$product' AND transaksi_detail.ukuran = '$ukuran' AND transaksi_detail.qty='$qty'")) {
+            $query = "UPDATE transaksi_detail SET qty = '$qty' , id_product = '$product' , price = '$price', ukuran = '$ukuran' WHERE id_transaksi = '$transaksi[id_transaksi]' AND id_product = '$product' AND transaksi_detail.ukuran='$ukuran'";
+        } else {
+            return 0;
+        }
     }
 
     mysqli_query($db, $query);
